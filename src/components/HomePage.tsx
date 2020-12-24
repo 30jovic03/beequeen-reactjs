@@ -1,13 +1,19 @@
 import React from 'react';
+import { Container } from 'react-bootstrap';
+import MainMenu from './MainMenu';
 
 
 class HomePage extends React.Component {
 
   render() {
     return(
-      <div>
-        Home page
-      </div>
+      <Container>
+        <MainMenu role='user' />
+
+        <div>
+          Home page
+        </div>
+      </Container>
     )
   }
 }

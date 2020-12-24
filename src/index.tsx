@@ -2,6 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.min.js';
+import 'jquery/dist/jquery.js';
+import 'popper.js/dist/popper.js';
+import '@fortawesome/fontawesome-free/css/fontawesome.min.css';
 import { HashRouter, Route, Switch } from 'react-router-dom';
 import HomePage from './components/HomePage';
 
