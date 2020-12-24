@@ -117,3 +117,16 @@
     font-size: 14px;
   }
 }
+
+/* admin article img modal styles */
+.backdrop{
+  background: rgba(61, 61, 61, 0.5);
+}
+.backdrop img{
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  margin: 10px auto;
+  box-shadow: 3px 5px 7px rgba(0,0,0,0.5);
+  border: 3px solid white;
+}
