@@ -133,20 +133,20 @@ class AdministratorDashboardCategory extends React.Component {
                 <th colSpan={ 3 }>
                     <Link to="/administrator/dashboard/"
                           className="btn btn-sm btn-warning">
-                      <FontAwesomeIcon icon={ faBackward } /> Back to dashboard
+                      <FontAwesomeIcon icon={ faBackward } /> Početna (admin)
                     </Link>
                   </th>
                   <th className="text-center">
                     <Button variant="warning" size="sm"
                             onClick={ () => this.showAddModal() }>
-                      <FontAwesomeIcon icon={ faPlus } /> Add
+                      <FontAwesomeIcon icon={ faPlus } /> Dodaj kategoriju
                     </Button>
                   </th>
                 </tr>
                 <tr>
                   <th className="text-right">ID</th>
-                  <th>Name</th>
-                  <th className="text-right">Parent ID</th>
+                  <th>Ime</th>
+                  <th className="text-right">Roditelj ID</th>
                   <th></th>
                 </tr>
               </thead>
@@ -159,12 +159,12 @@ class AdministratorDashboardCategory extends React.Component {
                     <td className="text-center">
                       <Link to={ "/administrator/dashboard/feature/" + category.categoryId }
                             className="btn btn-sm btn-warning mr-2">
-                        <FontAwesomeIcon icon={ faListUl } /> Features
+                        <FontAwesomeIcon icon={ faListUl } /> Osobine
                       </Link>
 
                       <Button variant="warning" size="sm"
                               onClick={ () => this.showEditModal(category) }>
-                        <FontAwesomeIcon icon={ faEdit } /> Edit
+                        <FontAwesomeIcon icon={ faEdit } /> Izmeni
                       </Button>
                     </td>
                   </tr>
@@ -176,23 +176,23 @@ class AdministratorDashboardCategory extends React.Component {
 
         <Modal size="lg" centered show={ this.state.addModal.visible } onHide={ () => this.setAddModalVisibleState(false) }>
           <Modal.Header closeButton  className="bg-warning">
-            <Modal.Title>Add new category</Modal.Title>
+            <Modal.Title>Dodaj novu kategoriju</Modal.Title>
           </Modal.Header>
           <ModalBody>
             <Form.Group>
-              <Form.Label htmlFor="name">Name</Form.Label>
+              <Form.Label htmlFor="name">Ime</Form.Label>
               <Form.Control id="name" type="text" value={ this.state.addModal.name }
                       onChange={ (e) => this.setAddModalStringFieldState('name', e.target.value) } />
             </Form.Group>
             <Form.Group>
-              <Form.Label htmlFor="add-photo">Article photo</Form.Label>
+              <Form.Label htmlFor="add-photo">Slika</Form.Label>
               <Form.File id="add-photo" />
             </Form.Group>
             <Form.Group>
-              <Form.Label htmlFor="parentCategoryId">Parent category</Form.Label>
+              <Form.Label htmlFor="parentCategoryId">Roditeljska kategorija</Form.Label>
               <Form.Control id="parentCategoryId" as="select" value={ this.state.addModal.parentCategoryId }
                             onChange={ (e) => this.setAddModalStringFieldState('parentCategoryId', e.target.value) }>
-                <option value="null">No parent category</option>
+                <option value="null">Nema roditeljske kat.</option>
                 { this.state.categories.map(category => (
                   <option value={ category.categoryId }>
                     { category.name }
@@ -205,7 +205,7 @@ class AdministratorDashboardCategory extends React.Component {
             ) : '' }
             <Form.Group>
               <Button variant="warning" onClick={ () => this.doAddCategory() }>
-                <FontAwesomeIcon icon={ faPlus } /> Add new category
+                <FontAwesomeIcon icon={ faPlus } /> Dodaj kategoriju
               </Button>
             </Form.Group>
           </ModalBody>
@@ -213,19 +213,19 @@ class AdministratorDashboardCategory extends React.Component {
 
         <Modal size="lg" centered show={ this.state.editModal.visible } onHide={ () => this.setEditModalVisibleState(false) }>
           <Modal.Header closeButton  className="bg-warning">
-            <Modal.Title>Edit category</Modal.Title>
+            <Modal.Title>Izmeni kategoriju</Modal.Title>
           </Modal.Header>
           <ModalBody>
             <Form.Group>
-              <Form.Label htmlFor="name">Name</Form.Label>
+              <Form.Label htmlFor="name">Ime</Form.Label>
               <Form.Control id="name" type="text" value={ this.state.editModal.name }
                       onChange={ (e) => this.setEditModalStringFieldState('name', e.target.value) } />
             </Form.Group>
             <Form.Group>
-              <Form.Label htmlFor="parentCategoryId">Parent category</Form.Label>
+              <Form.Label htmlFor="parentCategoryId">Roditeljska kategorija</Form.Label>
               <Form.Control id="parentCategoryId" as="select" value={ this.state.editModal.parentCategoryId }
                             onChange={ (e) => this.setEditModalStringFieldState('parentCategoryId', e.target.value) }>
-                <option value="null">No parent category</option>
+                <option value="null">Nema roditeljske kat.</option>
                 { this.state.categories
                       .filter(category => category.categoryId !== this.state.editModal.categoryId)
                       .map(category => (
@@ -240,7 +240,7 @@ class AdministratorDashboardCategory extends React.Component {
             ) : '' }
             <Form.Group>
               <Button variant="warning" onClick={ () => this.doEditCategory() }>
-                <FontAwesomeIcon icon={ faEdit } /> Edit category
+                <FontAwesomeIcon icon={ faEdit } /> Sačuvaj izmene
               </Button>
             </Form.Group>
           </ModalBody>

@@ -135,7 +135,7 @@ class AdministratorDashboardFeature extends React.Component<AdministratorDashboa
         <Card>
           <Card.Header className="bg-warning">
             <Card.Title>
-            <FontAwesomeIcon icon={ faListUl } /> Features
+            <FontAwesomeIcon icon={ faListUl } /> Osobine kategorije
             </Card.Title>
           </Card.Header>
 
@@ -147,19 +147,19 @@ class AdministratorDashboardFeature extends React.Component<AdministratorDashboa
                   <th colSpan={ 2 }>
                     <Link to="/administrator/dashboard/category/"
                           className="btn btn-sm btn-warning">
-                      <FontAwesomeIcon icon={ faBackward } /> Back to categories
+                      <FontAwesomeIcon icon={ faBackward } /> Nazad na 'Kategorije'
                     </Link>
                   </th>
                   <th className="text-center">
                     <Button variant="warning" size="sm"
                             onClick={ () => this.showAddModal() }>
-                      <FontAwesomeIcon icon={ faPlus } /> Add
+                      <FontAwesomeIcon icon={ faPlus } /> Dodaj osobinu
                     </Button>
                   </th>
                 </tr>
                 <tr>
                   <th className="text-right">ID</th>
-                  <th>Name</th>
+                  <th>Ime</th>
                   <th></th>
                 </tr>
               </thead>
@@ -171,7 +171,7 @@ class AdministratorDashboardFeature extends React.Component<AdministratorDashboa
                     <td className="text-center">
                       <Button variant="info" size="sm"
                               onClick={ () => this.showEditModal(feature) }>
-                        <FontAwesomeIcon icon={ faEdit } /> Edit
+                        <FontAwesomeIcon icon={ faEdit } /> Izmeni
                       </Button>
                     </td>
                   </tr>
@@ -183,11 +183,11 @@ class AdministratorDashboardFeature extends React.Component<AdministratorDashboa
 
         <Modal size="lg" centered show={ this.state.addModal.visible } onHide={ () => this.setAddModalVisibleState(false) }>
           <Modal.Header closeButton  className="bg-warning">
-            <Modal.Title>Add new feature</Modal.Title>
+            <Modal.Title>Dodaj novu osobinu</Modal.Title>
           </Modal.Header>
           <ModalBody>
             <Form.Group>
-              <Form.Label htmlFor="name">Name</Form.Label>
+              <Form.Label htmlFor="name">Ime</Form.Label>
               <Form.Control id="name" type="text" value={ this.state.addModal.name }
                       onChange={ (e) => this.setAddModalStringFieldState('name', e.target.value) } />
             </Form.Group>
@@ -196,7 +196,7 @@ class AdministratorDashboardFeature extends React.Component<AdministratorDashboa
             ) : '' }
             <Form.Group>
               <Button variant="warning" onClick={ () => this.doAddFeature() }>
-                <FontAwesomeIcon icon={ faPlus } /> Add new feature
+                <FontAwesomeIcon icon={ faPlus } /> Dodaj osobinu
               </Button>
             </Form.Group>
           </ModalBody>
@@ -204,11 +204,11 @@ class AdministratorDashboardFeature extends React.Component<AdministratorDashboa
 
         <Modal size="lg" centered show={ this.state.editModal.visible } onHide={ () => this.setEditModalVisibleState(false) }>
           <Modal.Header closeButton>
-            <Modal.Title>Edit feature</Modal.Title>
+            <Modal.Title>Izmeni osobinu</Modal.Title>
           </Modal.Header>
           <ModalBody>
             <Form.Group>
-              <Form.Label htmlFor="name">Name</Form.Label>
+              <Form.Label htmlFor="name">Ime</Form.Label>
               <Form.Control id="name" type="text" value={ this.state.editModal.name }
                       onChange={ (e) => this.setEditModalStringFieldState('name', e.target.value) } />
             </Form.Group>
@@ -217,7 +217,7 @@ class AdministratorDashboardFeature extends React.Component<AdministratorDashboa
             ) : '' }
             <Form.Group>
               <Button variant="primary" onClick={ () => this.doEditFeature() }>
-                <FontAwesomeIcon icon={ faEdit } /> Edit feature
+                <FontAwesomeIcon icon={ faEdit } /> Sačuvaj izmene
               </Button>
             </Form.Group>
           </ModalBody>

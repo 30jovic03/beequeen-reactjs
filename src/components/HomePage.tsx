@@ -69,7 +69,7 @@ class HomePage extends React.Component {
       <li>
         <Link to={ `/category/${ category.categoryId }` }>
           <div className="hexagon">
-            <img src={ category.imageUrl } />
+            <img src={ category.imageUrl } alt={ category.name } />
             <p>{ category.name }</p>
           </div>
         </Link>
