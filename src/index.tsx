@@ -10,6 +10,7 @@ import '@fortawesome/fontawesome-free/css/fontawesome.min.css';
 import { HashRouter, Route, Switch } from 'react-router-dom';
 import HomePage from './components/HomePage';
 import AdministratorDashboard from './components/AdministratorDashboard';
+import AdministratorDashboardCategory from './components/AdministratorDashboardCategory';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -17,6 +18,7 @@ ReactDOM.render(
     <Switch>
         <Route exact path="/" component={ HomePage } />
         <Route exact path="/administrator/dashboard" component={ AdministratorDashboard } />
+        <Route path="/administrator/dashboard/category" component={ AdministratorDashboardCategory } />
       </Switch>
     </HashRouter>
   </React.StrictMode>,
