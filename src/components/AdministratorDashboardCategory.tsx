@@ -275,7 +275,7 @@ class AdministratorDashboardCategory extends React.Component {
     const collectionRef = projectFirestore.collection('categories');
 
     storageRef.put(file).on('state_changed', (snap) => {
-      let percentage = (snap.bytesTransferred / snap.totalBytes) * 100;
+      
     }, (err) => {
 
     }, async () => {
