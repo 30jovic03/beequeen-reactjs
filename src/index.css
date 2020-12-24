@@ -107,6 +107,10 @@
   #grid li .hexagon h1 {
     font-size: 18px;
   }
+  #grid li .hexagon p {
+    top: 63%;
+    font-size: 15px;
+  }
 }
 
 @media only screen and (max-width: 600px) {
@@ -115,6 +119,10 @@
   }
   #grid li .hexagon h1 {
     font-size: 14px;
+  }
+  #grid li .hexagon p {
+    top: 65%;
+    font-size: 13px;
   }
 }
 
