@@ -11,6 +11,7 @@ import { HashRouter, Route, Switch } from 'react-router-dom';
 import HomePage from './components/HomePage';
 import AdministratorDashboard from './components/AdministratorDashboard';
 import AdministratorDashboardCategory from './components/AdministratorDashboardCategory';
+import AdministratorDashboardFeature from './components/AdministratorDashboardFeature';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -19,6 +20,7 @@ ReactDOM.render(
         <Route exact path="/" component={ HomePage } />
         <Route exact path="/administrator/dashboard" component={ AdministratorDashboard } />
         <Route path="/administrator/dashboard/category" component={ AdministratorDashboardCategory } />
+        <Route path="/administrator/dashboard/feature/:cId" component={ AdministratorDashboardFeature } />
       </Switch>
     </HashRouter>
   </React.StrictMode>,
