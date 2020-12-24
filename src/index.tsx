@@ -9,12 +9,14 @@ import 'popper.js/dist/popper.js';
 import '@fortawesome/fontawesome-free/css/fontawesome.min.css';
 import { HashRouter, Route, Switch } from 'react-router-dom';
 import HomePage from './components/HomePage';
+import AdministratorDashboard from './components/AdministratorDashboard';
 
 ReactDOM.render(
   <React.StrictMode>
     <HashRouter>
     <Switch>
         <Route exact path="/" component={ HomePage } />
+        <Route exact path="/administrator/dashboard" component={ AdministratorDashboard } />
       </Switch>
     </HashRouter>
   </React.StrictMode>,

@@ -16,6 +16,7 @@
     "@types/react-dom": "^16.9.8",
     "@types/react-router-dom": "^5.1.6",
     "bootstrap": "^4.5.3",
+    "firebase": "^7.16.1",
     "jquery": "^3.5.1",
     "popper.js": "^1.16.1",
     "react": "^17.0.1",
