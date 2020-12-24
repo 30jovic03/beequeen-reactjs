@@ -1,12 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { HashRouter, Route, Switch } from 'react-router-dom';
+import HomePage from './components/HomePage';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <HashRouter>
+    <Switch>
+        <Route exact path="/" component={ HomePage } />
+      </Switch>
+    </HashRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );
