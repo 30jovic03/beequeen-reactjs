@@ -1,10 +1,44 @@
 
+#body {
+  width: 100vw;
+  min-height: 100vh;
+  background-color: #fdbf00;
+}
+.left-img {
+  position: absolute;
+  top: 20%;
+  left: 0;
+}
+.right-img {
+  position: absolute;
+  top: 40%;
+  right: 0;
+}
+#logo {
+  position: absolute;
+  top: 30px;
+  left: 7vw;
+}
+@media only screen and (max-width: 920px) {
+  .left-img, .right-img, #logo {
+    visibility: hidden;
+  }
+}
+
+/* HomePage */
+
+.home-page {
+  min-height: 93vh;
+}
+.home-page img {
+  width: 100%;
+}
 
 /* HomePage hexagonal grid */
 
 #grid {
   position: relative;
-  width: 90%;
+  width: 70%;
   margin: 0 auto;
   padding: 0; /* Clears unordered list default of 40px */
 }
@@ -72,8 +106,8 @@
 }
 #grid li .hexagon p {
   position: absolute;
-  top: 75%;
-  font-size: 20px;
+  top: 72%;
+  font-size: 18px;
   width: 100%;
   text-align: center;
   color: #ffff00;
@@ -104,12 +138,9 @@
   #grid {
     width: 100%;
   }
-  #grid li .hexagon h1 {
-    font-size: 18px;
-  }
   #grid li .hexagon p {
     top: 63%;
-    font-size: 15px;
+    font-size: 14px;
   }
 }
 
@@ -117,12 +148,9 @@
   #grid {
     width: 100%;
   }
-  #grid li .hexagon h1 {
-    font-size: 14px;
-  }
   #grid li .hexagon p {
     top: 65%;
-    font-size: 13px;
+    font-size: 11px;
   }
 }
 
