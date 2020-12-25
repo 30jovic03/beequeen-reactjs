@@ -1,7 +1,5 @@
 import React from 'react';
-import { Container, Card } from 'react-bootstrap';
-import { faListAlt } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Container } from 'react-bootstrap';
 import CategoryType from '../types/CategoryType';
 import { Link } from 'react-router-dom';
 import { projectFirestore } from '../firebase/config';

@@ -13,7 +13,7 @@ import AdministratorDashboard from './components/AdministratorDashboard';
 import AdministratorDashboardCategory from './components/AdministratorDashboardCategory';
 import AdministratorDashboardFeature from './components/AdministratorDashboardFeature';
 import AdministratorDashboardArticle from './components/AdministratorDashboardArticle';
-import { Container, Row } from 'react-bootstrap';
+import { Row } from 'react-bootstrap';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -28,15 +28,15 @@ ReactDOM.render(
         </Switch>
       </HashRouter>
       <div className="left-img">
-        <img src="https://firebasestorage.googleapis.com/v0/b/bee-queen.appspot.com/o/side-bees.png?alt=media&token=f29ff9bb-4561-487d-b0b3-28cd348e0cef" />
+        <img src="https://firebasestorage.googleapis.com/v0/b/bee-queen.appspot.com/o/side-bees.png?alt=media&token=f29ff9bb-4561-487d-b0b3-28cd348e0cef" alt="bee" />
       </div>
       <div className="right-img">
-        <img src="https://firebasestorage.googleapis.com/v0/b/bee-queen.appspot.com/o/side-bees.png?alt=media&token=f29ff9bb-4561-487d-b0b3-28cd348e0cef" />
+        <img src="https://firebasestorage.googleapis.com/v0/b/bee-queen.appspot.com/o/side-bees.png?alt=media&token=f29ff9bb-4561-487d-b0b3-28cd348e0cef" alt="bee" />
       </div>
       <div id="logo">
         <Row>
           <h5>BeeQueen<br/>web shop</h5>
-          <img src="https://firebasestorage.googleapis.com/v0/b/bee-queen.appspot.com/o/logo.png?alt=media&token=762dd280-126c-4733-b7c1-22d45bc52e08" />
+          <img src="https://firebasestorage.googleapis.com/v0/b/bee-queen.appspot.com/o/logo.png?alt=media&token=762dd280-126c-4733-b7c1-22d45bc52e08" alt="bee" />
         </Row>
       </div>
     </div>
