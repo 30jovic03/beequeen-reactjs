@@ -6,21 +6,33 @@
 }
 .left-img {
   position: absolute;
-  top: 20%;
-  left: 0;
+  top: 50%;
+  left: 2vw;
 }
 .right-img {
   position: absolute;
-  top: 40%;
-  right: 0;
+  top: 7%;
+  right: 2vw;
+}
+#natural {
+  position: absolute;
+  top: 65%;
+  right: 5.5vw;
 }
 #logo {
   position: absolute;
-  top: 30px;
-  left: 7vw;
+  top: 20px;
+  left: 8vw;
 }
+#logo h4 {
+  text-align: center;
+}
+.component {
+position: relative;
+}
+
 @media only screen and (max-width: 920px) {
-  .left-img, .right-img, #logo {
+  .left-img, .right-img, #logo, #natural {
     visibility: hidden;
   }
 }

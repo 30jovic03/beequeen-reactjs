@@ -118,7 +118,7 @@ class AdministratorDashboardCategory extends React.Component {
       <Container>
         <MainMenu role='administrator' />
 
-        <Card>
+        <Card className="bg-secondary">
           <Card.Header className="bg-warning">
             <Card.Title>
             <FontAwesomeIcon icon={ faListAlt } /> Kategorije
@@ -127,7 +127,7 @@ class AdministratorDashboardCategory extends React.Component {
 
           <Card.Body>
 
-            <Table hover size="sm" bordered>
+            <Table hover size="sm" className="text-light" bordered>
               <thead>
                 <tr>
                 <th colSpan={ 3 }>
@@ -178,7 +178,7 @@ class AdministratorDashboardCategory extends React.Component {
           <Modal.Header closeButton  className="bg-warning">
             <Modal.Title>Dodaj novu kategoriju</Modal.Title>
           </Modal.Header>
-          <ModalBody>
+          <ModalBody className="bg-secondary text-light">
             <Form.Group>
               <Form.Label htmlFor="name">Ime</Form.Label>
               <Form.Control id="name" type="text" value={ this.state.addModal.name }
@@ -215,7 +215,7 @@ class AdministratorDashboardCategory extends React.Component {
           <Modal.Header closeButton  className="bg-warning">
             <Modal.Title>Izmeni kategoriju</Modal.Title>
           </Modal.Header>
-          <ModalBody>
+          <ModalBody className="bg-secondary text-light">
             <Form.Group>
               <Form.Label htmlFor="name">Ime</Form.Label>
               <Form.Control id="name" type="text" value={ this.state.editModal.name }

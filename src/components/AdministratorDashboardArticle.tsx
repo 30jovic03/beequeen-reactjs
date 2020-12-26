@@ -311,7 +311,7 @@ class AdministratorDashboardArticle extends React.Component {
       <Container>
         <MainMenu role='administrator' />
 
-        <Card>
+        <Card className="bg-secondary">
           <Card.Header className="bg-warning">
             <Card.Title>
             <FontAwesomeIcon icon={ faListAlt } /> Artikli
@@ -320,7 +320,7 @@ class AdministratorDashboardArticle extends React.Component {
 
           <Card.Body>
 
-            <Table hover size="sm" bordered>
+            <Table hover size="sm" className="text-light" bordered>
               <thead>
                 <tr>
                   <th colSpan={ 4 }>
@@ -382,7 +382,7 @@ class AdministratorDashboardArticle extends React.Component {
           <Modal.Header closeButton className="bg-warning">
             <Modal.Title>Dodaj novi artikal</Modal.Title>
           </Modal.Header>
-          <ModalBody>
+          <ModalBody className="bg-secondary text-light">
             <Form.Group>
               <Form.Label htmlFor="add-categoryId">Kategorija</Form.Label>
               <Form.Control id="add-categoryId" as="select" value={ this.state.addModal.categoryId }
@@ -440,7 +440,7 @@ class AdministratorDashboardArticle extends React.Component {
           <Modal.Header closeButton className="bg-warning">
             <Modal.Title>Izmeni artikal</Modal.Title>
           </Modal.Header>
-          <ModalBody>
+          <ModalBody className="bg-secondary text-light">
             <Form.Group>
               <Form.Label htmlFor="edit-name">Ime</Form.Label>
               <Form.Control id="edit-name" type="text" value={ this.state.editModal.name }

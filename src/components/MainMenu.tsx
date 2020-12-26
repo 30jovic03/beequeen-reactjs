@@ -25,7 +25,7 @@ export default class MainMenu extends React.Component<MainMenuProperties> {
 
   getUserMenu() {
     return(
-      <Nav variant="pills" className="bg-secondary">
+      <Nav variant="pills" className="nav-bar bg-secondary">
         <HashRouter>
           <Link to='/' className="nav-link text-warning">
           Početna

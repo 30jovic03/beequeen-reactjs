@@ -5,6 +5,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
 import FeatureType from '../types/FeatureType';
 import { projectFirestore } from '../firebase/config';
+import CategoryType from '../types/CategoryType';
+import MainMenu from './MainMenu';
 
 interface AdministratorDashboardFeatureProperties {
   match: {
@@ -17,6 +19,7 @@ interface AdministratorDashboardFeatureProperties {
 interface AdministratorDashboardFeatureState {
   isAdministratorLoggedIn: boolean;
   features: FeatureType[];
+  thisCategoryName: string;
 
   addModal: {
     visible: boolean;
@@ -41,6 +44,7 @@ class AdministratorDashboardFeature extends React.Component<AdministratorDashboa
     this.state = {
       isAdministratorLoggedIn: true,
       features: [],
+      thisCategoryName: '',
 
       addModal: {
         visible: false,
@@ -91,6 +95,7 @@ class AdministratorDashboardFeature extends React.Component<AdministratorDashboa
 
   componentDidMount() {
     this.getFeatures();
+    this.getCategoryName();
   }
   componentDidUpdate(oldProps: any) {
     if (this.props.match.params.cId === oldProps.match.params.cId) {
@@ -121,6 +126,23 @@ class AdministratorDashboardFeature extends React.Component<AdministratorDashboa
     this.setState(newState);
   }
 
+  private getCategoryName() {
+
+    projectFirestore.collection("categories").get().then((querySnapshot) => {
+      let documents: CategoryType[] = [];
+      querySnapshot.forEach(doc => {
+        documents.push({...doc.data(), categoryId: doc.id});
+      });
+
+      const category = documents.find(doc => doc.categoryId === String(this.props.match.params.cId))
+      const categoryName = category?.name
+      
+      this.setState(Object.assign(this.state, {
+        thisCategoryName: categoryName,
+      }));
+    });
+  }
+
   private setLogginState(isLoggedIn: boolean) {
     this.setState(Object.assign(this.state, {
       isAdministratorLoggedIn: isLoggedIn,
@@ -131,17 +153,18 @@ class AdministratorDashboardFeature extends React.Component<AdministratorDashboa
 
     return (
       <Container>
+        <MainMenu role='administrator' />
 
-        <Card>
+        <Card className="bg-secondary">
           <Card.Header className="bg-warning">
             <Card.Title>
-            <FontAwesomeIcon icon={ faListUl } /> Osobine kategorije
+            <FontAwesomeIcon icon={ faListUl } /> Osobine kategorije "{ this.state.thisCategoryName }"
             </Card.Title>
           </Card.Header>
 
           <Card.Body>
 
-            <Table hover size="sm" bordered>
+            <Table hover size="sm" className="text-light" bordered>
               <thead>
                 <tr>
                   <th colSpan={ 2 }>
@@ -169,7 +192,7 @@ class AdministratorDashboardFeature extends React.Component<AdministratorDashboa
                     <td className="text-right">{ feature.featureId }</td>
                     <td>{ feature.name }</td>
                     <td className="text-center">
-                      <Button variant="info" size="sm"
+                      <Button variant="warning" size="sm"
                               onClick={ () => this.showEditModal(feature) }>
                         <FontAwesomeIcon icon={ faEdit } /> Izmeni
                       </Button>
@@ -185,7 +208,7 @@ class AdministratorDashboardFeature extends React.Component<AdministratorDashboa
           <Modal.Header closeButton  className="bg-warning">
             <Modal.Title>Dodaj novu osobinu</Modal.Title>
           </Modal.Header>
-          <ModalBody>
+          <ModalBody className="bg-secondary text-light">
             <Form.Group>
               <Form.Label htmlFor="name">Ime</Form.Label>
               <Form.Control id="name" type="text" value={ this.state.addModal.name }
@@ -203,10 +226,10 @@ class AdministratorDashboardFeature extends React.Component<AdministratorDashboa
         </Modal>
 
         <Modal size="lg" centered show={ this.state.editModal.visible } onHide={ () => this.setEditModalVisibleState(false) }>
-          <Modal.Header closeButton>
+          <Modal.Header closeButton className="bg-warning">
             <Modal.Title>Izmeni osobinu</Modal.Title>
           </Modal.Header>
-          <ModalBody>
+          <ModalBody className="bg-secondary text-light">
             <Form.Group>
               <Form.Label htmlFor="name">Ime</Form.Label>
               <Form.Control id="name" type="text" value={ this.state.editModal.name }
@@ -216,7 +239,7 @@ class AdministratorDashboardFeature extends React.Component<AdministratorDashboa
               <Alert variant="danger" value={ this.state.editModal.message } />
             ) : '' }
             <Form.Group>
-              <Button variant="primary" onClick={ () => this.doEditFeature() }>
+              <Button variant="warning" onClick={ () => this.doEditFeature() }>
                 <FontAwesomeIcon icon={ faEdit } /> Sačuvaj izmene
               </Button>
             </Form.Group>

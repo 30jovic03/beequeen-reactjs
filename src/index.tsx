@@ -18,6 +18,20 @@ import { Row } from 'react-bootstrap';
 ReactDOM.render(
   <React.StrictMode>
     <div id="body">
+      <div className="left-img">
+        <img src="https://firebasestorage.googleapis.com/v0/b/bee-queen.appspot.com/o/side-bees.png?alt=media&token=f29ff9bb-4561-487d-b0b3-28cd348e0cef" alt="bee" />
+      </div>
+      <div className="right-img">
+        <img src="https://firebasestorage.googleapis.com/v0/b/bee-queen.appspot.com/o/side-bees.png?alt=media&token=f29ff9bb-4561-487d-b0b3-28cd348e0cef" alt="bee" />
+      </div>
+      <div id="logo">
+        <img src="https://firebasestorage.googleapis.com/v0/b/bee-queen.appspot.com/o/logo.png?alt=media&token=3f761ab0-d406-4327-8154-74f3ebabd37a" alt="bee" />
+        <h4>BeeQueen<br/>web shop</h4>
+      </div>
+      <div id="natural">
+        <img src="https://firebasestorage.googleapis.com/v0/b/bee-queen.appspot.com/o/natural.png?alt=media&token=55134bd4-cfbc-4793-9bb3-b390c9b2b52f" alt="natural" />
+      </div>
+      <div className="component">
       <HashRouter>
         <Switch>
           <Route exact path="/" component={ HomePage } />
@@ -27,18 +41,8 @@ ReactDOM.render(
           <Route path="/administrator/dashboard/article" component={ AdministratorDashboardArticle } />
         </Switch>
       </HashRouter>
-      <div className="left-img">
-        <img src="https://firebasestorage.googleapis.com/v0/b/bee-queen.appspot.com/o/side-bees.png?alt=media&token=f29ff9bb-4561-487d-b0b3-28cd348e0cef" alt="bee" />
       </div>
-      <div className="right-img">
-        <img src="https://firebasestorage.googleapis.com/v0/b/bee-queen.appspot.com/o/side-bees.png?alt=media&token=f29ff9bb-4561-487d-b0b3-28cd348e0cef" alt="bee" />
-      </div>
-      <div id="logo">
-        <Row>
-          <h5>BeeQueen<br/>web shop</h5>
-          <img src="https://firebasestorage.googleapis.com/v0/b/bee-queen.appspot.com/o/logo.png?alt=media&token=762dd280-126c-4733-b7c1-22d45bc52e08" alt="bee" />
-        </Row>
-      </div>
+      
     </div>
   </React.StrictMode>,
   document.getElementById('root')

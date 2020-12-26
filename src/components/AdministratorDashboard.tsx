@@ -10,7 +10,7 @@ const AdministratorDashboard = () => {
     <Container>
       <MainMenu role='administrator' />
 
-      <Card>
+      <Card className="bg-secondary">
         <Card.Header className="bg-warning">
           <Card.Title>
           <FontAwesomeIcon icon={ faHome } /> Administrator Dashboard
