@@ -8,9 +8,10 @@ type ArticleType = {
   imageUrl?: string;
   price?: number;
   features?: {
-    featureId: string;
-    name: string;
-    value: string;
+    articleFeatureId?: string;
+    featureId?: string;
+    name?: string;
+    value?: string;
   }[];
 }
 

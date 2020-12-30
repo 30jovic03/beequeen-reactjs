@@ -8,6 +8,7 @@ import { projectFirestore, projectStorage } from '../firebase/config';
 import FeatureType from '../types/FeatureType';
 import { Link } from 'react-router-dom';
 import MainMenu from './MainMenu';
+import ArticleFeatureType from '../types/ArticleFeatureType';
 
 interface AdministratorDashboardArticleState {
   isAdministratorLoggedIn: boolean;
@@ -47,6 +48,7 @@ interface AdministratorDashboardArticleState {
     description: string;
     price: number;
     features: {
+      articleFeatureId: string;
       use: number;
       featureId: string;
       name: string;
@@ -243,12 +245,35 @@ class AdministratorDashboardArticle extends React.Component {
   private getArticles() {
 
     projectFirestore.collection("articles").get().then((querySnapshot) => {
-      let documents: ArticleType[] = [];
+      let articles: ArticleType[] = [];
       querySnapshot.forEach(doc => {
-        documents.push({...doc.data(), articleId: doc.id});
+        articles.push({
+          ...doc.data(),
+          articleId: doc.id,
+          features: []
+        });
       });
 
-      this.putArticlesInState(documents);
+      projectFirestore.collection("articleFeatures").get().then((querySnapshot) => {
+        let features: ArticleFeatureType[] = [];
+        querySnapshot.forEach(feature => {
+          features.push({...feature.data(),articleFeatureId: feature.id});
+        });
+
+        for (let article of articles) {
+          for (const feature of features) {
+            if (article.articleId === feature.articleId) {
+              article.features?.push(feature)
+            }
+          }
+        }
+        
+
+        console.log(articles);
+        
+        this.putArticlesInState(articles);
+      });
+      
     });
   }
 
@@ -524,18 +549,44 @@ class AdministratorDashboardArticle extends React.Component {
   }
 
   private showAddModal() {
+    this.setAddModalFeatures();
     this.setState(Object.assign(this.state,
       Object.assign(this.state.addModal, {
         visible: true,
         message: '',
         name: '',
-        categoryId: 1,
+        categoryId: this.state.categories[0].categoryId,
         excerpt: '',
         description: '',
         price: 0.01,
-        features: [],
       }),
     ));
+  }
+
+  private setAddModalFeatures() {
+    let allFeatures: FeatureBaseType[] = [];
+
+    projectFirestore.collection("features").where("categoryId", "==", this.state.categories[0].categoryId).get().then((querySnapshot) => {
+      let documents: FeatureType[] = [];
+      querySnapshot.forEach(doc => {
+        documents.push({...doc.data(), featureId: doc.id});
+      });
+      
+      documents.forEach(doc => {
+        allFeatures.push({
+          featureId: doc.featureId, 
+          name: doc.name,
+          value: '',
+          use: 0,
+        });
+      });
+
+      this.setState(Object.assign(this.state,
+        Object.assign(this.state.addModal, {
+          features:allFeatures,
+        }),
+      ));
+    });
   }
 
   private doAddArticle() {
@@ -553,7 +604,8 @@ class AdministratorDashboardArticle extends React.Component {
     }
 
     const storageRef = projectStorage.ref(file.name);
-    const collectionRef = projectFirestore.collection('articles');
+    const collectionArticles = projectFirestore.collection('articles');
+    const collectionArticleFeatures = projectFirestore.collection('articleFeatures');
 
     storageRef.put(file).on('state_changed', (snap) => {
       
@@ -561,23 +613,31 @@ class AdministratorDashboardArticle extends React.Component {
 
     }, async () => {
       const url = await storageRef.getDownloadURL();
-      const collectionData = {
+      const article = {
         categoryId: this.state.addModal.categoryId,
         categoryName: this.state.addModal.categoryName,
         name: this.state.addModal.name,
         excerpt: this.state.addModal.excerpt,
         description: this.state.addModal.description,
         price: this.state.addModal.price,
-        features: this.state.addModal.features
-            .filter(feature => feature.use === 1)
-            .map(feature => ({
-              featureId: feature.featureId,
-              name: feature.name,
-              value: feature.value,
-            })),
         imageUrl: url
       };
-      await collectionRef.add(collectionData);
+      let articleId = '';
+      await collectionArticles.add(article).then((docRef) => {
+        articleId = docRef.id;
+      });
+      let articleFeatures = this.state.addModal.features
+        .filter(feature => feature.use === 1)
+        .map(feature => ({
+          articleId: articleId,
+          categoryId: this.state.addModal.categoryId,
+          featureId: feature.featureId,
+          name: feature.name,
+          value: feature.value,
+        }));
+        articleFeatures.map(feature => {
+          collectionArticleFeatures.add(feature);
+        });
 
       this.setAddModalVisibleState(false);
       this.getArticles();
@@ -588,6 +648,7 @@ class AdministratorDashboardArticle extends React.Component {
   private async showEditModal(article: ArticleType) {
     this.setEditModalStringFieldState('name', String(article.name));
     this.setEditModalStringFieldState('articleId', String(article.articleId));
+    this.setEditModalStringFieldState('categoryId', String(article.categoryId));
     this.setEditModalStringFieldState('excerpt', String(article.excerpt));
     this.setEditModalStringFieldState('description', String(article.description));
     this.setEditModalNumberFieldState('price', article.price);
@@ -611,6 +672,7 @@ class AdministratorDashboardArticle extends React.Component {
         allFeatures.push({
           featureId: doc.featureId, 
           name: doc.name,
+          articleFeatureId: '',
           value: '',
           use: 0,
         });
@@ -620,6 +682,7 @@ class AdministratorDashboardArticle extends React.Component {
         for (let apiFeature of allFeatures) {
           for (const articleFeature of article.features) {
             if (articleFeature.featureId === apiFeature.featureId) {
+              apiFeature.articleFeatureId = articleFeature.articleFeatureId;
               apiFeature.use = 1;
               apiFeature.value = articleFeature.value;
             }
@@ -632,7 +695,7 @@ class AdministratorDashboardArticle extends React.Component {
           features:allFeatures,
         }),
       ));
-      
+      console.log(this.state.editModal);
       this.setEditModalVisibleState(true);
     });
   }
@@ -644,14 +707,32 @@ class AdministratorDashboardArticle extends React.Component {
       "excerpt": this.state.editModal.excerpt,
       "description": this.state.editModal.description,
       "price": this.state.editModal.price,
-      "features": this.state.editModal.features
-            .filter(feature => feature.use === 1)
-            .map(feature => ({
+    });
+
+    this.state.editModal.features
+      .map(feature => {
+        if (feature.use === 1) {
+          if (feature.articleFeatureId.length > 0) {
+            projectFirestore.collection("articleFeatures").doc(feature.articleFeatureId).update({
               featureId: feature.featureId,
               name: feature.name,
               value: feature.value,
-            })),
-    });
+            });
+          } else {
+            projectFirestore.collection("articleFeatures").add({
+              articleId: this.state.editModal.articleId,
+              categoryId: this.state.editModal.categoryId,
+              featureId: feature.featureId,
+              name: feature.name,
+              value: feature.value,
+            })
+          }
+        } else {
+          if (feature.articleFeatureId.length > 0) {
+            projectFirestore.collection("articleFeatures").doc(feature.articleFeatureId).delete();
+          }
+        }
+      });
 
     this.setEditModalVisibleState(false);
     this.getArticles();
