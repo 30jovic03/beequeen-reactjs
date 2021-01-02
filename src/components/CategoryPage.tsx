@@ -49,21 +49,6 @@ interface FeatureBaseType {
   values: string[];
 }
 
-interface CategoryDto {
-  categoryId: string;
-  name: string;
-  imagePath: string;
-}
-
-interface ArticleDto {
-  articleId: string;
-  name: string;
-  excerpt: string;
-  description: string;
-  price: number;
-  imageUrl: string;
-}
-
 export default class CategoryPage extends React.Component<CategoryPageProperties> {
   state: CategoryPageState;
 
@@ -396,9 +381,9 @@ export default class CategoryPage extends React.Component<CategoryPageProperties
       this.setSubcategories(documents);
     });
     
-    const orderParts = this.state.filters.order.split(' ');
-    const orderBy = orderParts[0];
-    const orderDirection = orderParts[1].toUpperCase();
+    //const orderParts = this.state.filters.order.split(' ');
+    //const orderBy = orderParts[0];
+    //const orderDirection = orderParts[1].toUpperCase();
 
     const featureFilters: any[] = [];
 
@@ -495,7 +480,7 @@ export default class CategoryPage extends React.Component<CategoryPageProperties
       
       let features: FeatureBaseType[] = [];
       documents.map(doc => {
-        if (features.length == 0) {
+        if (features.length === 0) {
           if (doc.value) {
             features.push({
               articleFeatureId: doc.articleFeatureId,
@@ -505,7 +490,7 @@ export default class CategoryPage extends React.Component<CategoryPageProperties
             })
           }
         } else {
-          let feature = features.find(feature => feature.featureId == doc.featureId);
+          let feature = features.find(feature => feature.featureId === doc.featureId);
           if (!feature) {
             if (doc.value) {
               features.push({
@@ -516,7 +501,7 @@ export default class CategoryPage extends React.Component<CategoryPageProperties
               })
             }
           } else {
-            let value = feature.values.find(value => value == doc.value)
+            let value = feature.values.find(value => value === doc.value)
             if (!value) {
               if (doc.value) {
                 feature.values.push(doc.value);

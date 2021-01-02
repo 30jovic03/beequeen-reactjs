@@ -10,10 +10,6 @@ interface SingleArticlePreviewProperties {
 
 export default class SingleArticlePreview extends React.Component<SingleArticlePreviewProperties> {
 
-  constructor(props: Readonly<SingleArticlePreviewProperties>) {
-    super(props)
-  }
-
   render() {
     return (
       <Col lg="4" md="6" sm="6" xs="12">
