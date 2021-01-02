@@ -418,59 +418,10 @@ export default class CategoryPage extends React.Component<CategoryPageProperties
       this.setArticles(documents);
     });
 
-    {/*api('api/article/search/', 'post', {
-      categoryId: Number(this.props.match.params.cId),
-      keywords: this.state.filters.keywords,
-      priceMin: this.state.filters.priceMinimum,
-      priceMax: this.state.filters.priceMaximum,
-      features: featureFilters,
-      orderBy: orderBy,
-      orderDirection: orderDirection,
-    })
-    .then((res: ApiResponse) => {
-      if (res.status === 'login') {
-        return this.setLogginState(false);
-      }
-
-      if (res.status === 'error') {
-        return this.setMessage('Request error. Please try to refresh the page.');
-      }
-
-      if (res.data.statusCode === 0) {
-        this.setMessage('');
-        this.setArticles([ ]);
-        return;
-      }
-
-      const articles: ArticleType[] =
-      res.data.map((article: ArticleDto) => {
-        const object: ArticleType = {
-          articleId: article.articleId,
-          name: article.name,
-          excerpt: article.excerpt,
-          description: article.description,
-          imageUrl: '',
-          price: 0,
-        };
-
-        if (article.photos && article.photos.length > 0) {
-          object.imageUrl = article.photos[article.photos.length-1].imagePath;
-        }
-
-        if (article.articlePrices && article.articlePrices.length > 0) {
-          object.price = article.articlePrices[article.articlePrices.length-1].price;
-        }
-
-        return object;
-      });
-
-      this.setArticles(articles);
-    });*/}
-
     this.getFeatures();
   };
 
-  getFeatures() {
+  private getFeatures() {
     projectFirestore.collection("articleFeatures").where("categoryId", "==", this.props.match.params.cId).get().then((querySnapshot) => {
       let documents: ArticleFeatureType[] = [];
       querySnapshot.forEach(doc => {
@@ -509,6 +460,7 @@ export default class CategoryPage extends React.Component<CategoryPageProperties
             }
           }
         }
+        return doc;
       })
       
       this.setFeatures(features);
