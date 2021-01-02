@@ -461,6 +461,7 @@ export default class CategoryPage extends React.Component<CategoryPageProperties
           }
         }
         return doc;
+        //return feature only couse of build
       })
       
       this.setFeatures(features);

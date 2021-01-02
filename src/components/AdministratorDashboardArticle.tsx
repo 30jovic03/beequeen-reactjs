@@ -637,6 +637,8 @@ class AdministratorDashboardArticle extends React.Component {
         }));
         articleFeatures.map(feature => {
           collectionArticleFeatures.add(feature);
+          return feature;
+          //return feature only couse of build
         });
 
       this.setAddModalVisibleState(false);
@@ -732,6 +734,8 @@ class AdministratorDashboardArticle extends React.Component {
             projectFirestore.collection("articleFeatures").doc(feature.articleFeatureId).delete();
           }
         }
+        return feature;
+        //return feature only couse of build
       });
 
     this.setEditModalVisibleState(false);
