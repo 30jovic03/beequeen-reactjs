@@ -268,12 +268,8 @@ class AdministratorDashboardArticle extends React.Component {
           }
         }
         
-
-        console.log(articles);
-        
         this.putArticlesInState(articles);
       });
-      
     });
   }
 

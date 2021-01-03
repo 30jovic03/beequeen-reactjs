@@ -23,6 +23,7 @@ interface CategoryPageState {
   category?: CategoryType;
   subcategories?: CategoryType[];
   articles?: ArticleType[];
+  previewArticles?: ArticleType[];
   message: string;
   filters: {
     keywords: string;
@@ -115,6 +116,7 @@ export default class CategoryPage extends React.Component<CategoryPageProperties
     });
 
     this.setState(newState);
+    this.applyFilters();
   }
 
   render() {
@@ -214,7 +216,57 @@ export default class CategoryPage extends React.Component<CategoryPageProperties
   }
 
   private applyFilters() {
-    this.getCategoryData();
+    let articles: any[] = [];
+    this.state.articles?.map(article => {
+        articles.push({
+          articleId: article.articleId,
+          name: article.name,
+          price: article.price,
+          excerpt: article.excerpt,
+          imageUrl: article.imageUrl,
+          features: article.features
+        })
+      return articles;
+    });
+
+    articles = articles.filter(article =>
+      article.name.includes(this.state.filters.keywords)
+      );
+    
+    articles = articles.filter(article => 
+      this.state.filters.priceMinimum < article.price && article.price < this.state.filters.priceMaximum
+    );
+
+
+    switch(this.state.filters.order) {
+      case "name asc": {
+        articles?.sort(function(a,b) {
+          return ((a.name < b.name) ? -1 : ((a.name > b.name) ? 1 : 0));
+      });
+      } break;
+      case "name desc": {
+        articles?.sort(function(a,b) {
+          return ((a.name > b.name) ? -1 : ((a.name < b.name) ? 1 : 0));
+      });
+      } break;
+      case "price asc": {
+        articles?.sort(function(a, b) {
+          return (a.price - b.price);
+        });
+      } break;
+      case "price desc": {
+        articles?.sort(function(a, b) {
+          return (b.price - a.price);
+        });
+      } break;
+    }
+
+    const newState = Object.assign(this.state, {
+      previewArticles: articles,
+    });
+
+    this.setState(newState);
+    console.log(this.state);
   }
 
   private setNewFilter(newFilter: any) {
@@ -334,13 +386,13 @@ export default class CategoryPage extends React.Component<CategoryPageProperties
   private showArticles() {
     if (this.state.articles?.length === 0) {
       return (
-        <div>U ovoj kategoriji trenutno nema ni jedan proizvod.</div>
+        <div>Trenutno nema ni jedan proizvod.</div>
       );
     }
 
     return (
       <Row>
-        { this.state.articles?.map(this.singleArticle) }
+        { this.state.previewArticles?.map(this.singleArticle) }
       </Row>
     );
   }
@@ -380,42 +432,33 @@ export default class CategoryPage extends React.Component<CategoryPageProperties
 
       this.setSubcategories(documents);
     });
-    
-    //const orderParts = this.state.filters.order.split(' ');
-    //const orderBy = orderParts[0];
-    //const orderDirection = orderParts[1].toUpperCase();
-
-    const featureFilters: any[] = [];
-
-    for (const item of this.state.filters.selectedFeatures) {
-      let found = false;
-      let foundRef = null;
-
-      for (const featureFilter of featureFilters) {
-        if (featureFilter.featureId === item.featureId) {
-          found = true;
-          foundRef = featureFilter;
-          break;
-        }
-      }
-
-      if (!found) {
-        featureFilters.push({
-          featureId: item.featureId,
-          values: [ item.value ],
-        });
-      } else {
-        foundRef.values.push(item.value);
-      }
-    }
 
     projectFirestore.collection("articles").where("categoryId", "==", this.props.match.params.cId).get().then((querySnapshot) => {
-      let documents: ArticleType[] = [];
+      let articles: ArticleType[] = [];
       querySnapshot.forEach(doc => {
-        documents.push({...doc.data(), articleId: doc.id});
+        articles.push({
+          ...doc.data(),
+          articleId: doc.id,
+          features: []
+        });
       });
 
-      this.setArticles(documents);
+      projectFirestore.collection("articleFeatures").get().then((querySnapshot) => {
+        let features: ArticleFeatureType[] = [];
+        querySnapshot.forEach(feature => {
+          features.push({...feature.data(),articleFeatureId: feature.id});
+        });
+
+        for (let article of articles) {
+          for (const feature of features) {
+            if (article.articleId === feature.articleId) {
+              article.features?.push(feature)
+            }
+          }
+        }
+        
+        this.setArticles(articles);
+      });
     });
 
     this.getFeatures();
@@ -461,7 +504,7 @@ export default class CategoryPage extends React.Component<CategoryPageProperties
           }
         }
         return doc;
-        //return feature only couse of build
+        //return doc only couse of build
       })
       
       this.setFeatures(features);
