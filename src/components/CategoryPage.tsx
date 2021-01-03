@@ -239,26 +239,26 @@ export default class CategoryPage extends React.Component<CategoryPageProperties
 
 
     switch(this.state.filters.order) {
-      case "name asc": {
+      case "name asc":
         articles?.sort(function(a,b) {
           return ((a.name < b.name) ? -1 : ((a.name > b.name) ? 1 : 0));
       });
-      } break;
-      case "name desc": {
+      break;
+      case "name desc":
         articles?.sort(function(a,b) {
           return ((a.name > b.name) ? -1 : ((a.name < b.name) ? 1 : 0));
       });
-      } break;
-      case "price asc": {
+      break;
+      case "price asc":
         articles?.sort(function(a, b) {
           return (a.price - b.price);
         });
-      } break;
-      case "price desc": {
+      break;
+      case "price desc":
         articles?.sort(function(a, b) {
           return (b.price - a.price);
         });
-      } break;
+      break;
     }
 
     const newState = Object.assign(this.state, {
@@ -266,7 +266,6 @@ export default class CategoryPage extends React.Component<CategoryPageProperties
     });
 
     this.setState(newState);
-    console.log(this.state);
   }
 
   private setNewFilter(newFilter: any) {
