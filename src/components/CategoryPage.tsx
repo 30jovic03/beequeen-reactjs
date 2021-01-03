@@ -276,6 +276,7 @@ export default class CategoryPage extends React.Component<CategoryPageProperties
               }
             }
           }
+          return article; // for firebase build
         })
         return filteredArticles; //for build
       })
