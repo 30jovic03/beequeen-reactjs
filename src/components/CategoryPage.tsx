@@ -261,11 +261,30 @@ export default class CategoryPage extends React.Component<CategoryPageProperties
       break;
     }
 
-    const newState = Object.assign(this.state, {
-      previewArticles: articles,
-    });
+    if (this.state.filters.selectedFeatures.length > 0) {
+      let filteredArticles: any[] = [];
+      this.state.filters.selectedFeatures.map(feature => {
+        articles.map(article => {
+          let articleFeature = article.features.find((articleFeature: { featureId: string; value: string; }) => articleFeature.featureId === feature.featureId && articleFeature.value === feature.value);
+          if (articleFeature) {
+            if (filteredArticles.length === 0) {
+              filteredArticles.push(article)
+            } else {
+              let art = filteredArticles.find(art => art.articleId === article.articleId);
+              if (!art) {
+                filteredArticles.push(article)
+              }
+            }
+          }
+        })
+        return filteredArticles; //for build
+      })
+      articles = filteredArticles;
+    }
 
-    this.setState(newState);
+    this.setState(Object.assign(this.state, {
+      previewArticles: articles,
+    }));
   }
 
   private setNewFilter(newFilter: any) {
