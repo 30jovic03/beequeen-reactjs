@@ -4,38 +4,29 @@ import { useAuth } from "../firebase/AuthContext"
 import { Link } from "react-router-dom"
 import MainMenu from "./MainMenu"
 
-export default function UserSignup() {
+export default function Login() {
   const emailRef = useRef<HTMLInputElement>(null)
   const passwordRef = useRef<HTMLInputElement>(null)
-  const passwordConfirmRef = useRef<HTMLInputElement>(null)
-  const { signup } = useAuth() as any
+  const { login } = useAuth()
   const [error, setError] = useState("")
-  const [signupComplete, setSignupComplete] = useState(false)
+  const [loginComplete, setLoginComplete] = useState(false)
   const [loading, setLoading] = useState(false)
 
   async function handleSubmit(e: { preventDefault: () => void }) {
     e.preventDefault()
 
-    if (emailRef.current && passwordRef.current && passwordConfirmRef.current) {
+    if (emailRef.current && passwordRef.current) {
 
-      if (passwordRef.current.value.length < 6) {
-        return setError("Password should be at least 6 characters")
-      }
-
-      if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-        return setError("Passwords do not match")
-      }
-      
       try {
         setError("")
         setLoading(true)
-        await signup(emailRef.current.value, passwordRef.current.value)
+        await login(emailRef.current.value, passwordRef.current.value)
       } catch {
-        setError("Failed to create an account")
+        setError("Failed to log in")
       }
   
       setLoading(false)
-      setSignupComplete(true)
+      setLoginComplete(true)
     }
   }
 
@@ -49,21 +40,21 @@ export default function UserSignup() {
       >
         <div className="w-100" style={{ maxWidth: "400px" }}>
           {
-            (signupComplete === false) ?
-            signupForm() :
-            signupCompleteMessage()
+            (loginComplete === false) ?
+            loginForm() :
+            loginCompleteMessage()
           }
         </div>
       </Container>
     </Container>
   )
 
-  function signupForm() {
+  function loginForm() {
     return (
       <>
         <Card>
           <Card.Header style={{ border: "3px solid #6c757d"}} className="bg-warning">
-            <Card.Title className="text-center">Registracija</Card.Title>
+            <Card.Title className="text-center">Prijava korisnika</Card.Title>
           </Card.Header>
           <Card.Body className="bg-secondary text-light">
             <Form onSubmit={handleSubmit}>
@@ -75,28 +66,28 @@ export default function UserSignup() {
                 <Form.Label>Lozinka</Form.Label>
                 <Form.Control type="password" ref={passwordRef} required />
               </Form.Group>
-              <Form.Group id="password-confirm">
-                <Form.Label>Potvrda lozinke</Form.Label>
-                <Form.Control type="password" ref={passwordConfirmRef} required />
-              </Form.Group>
               {error && <Alert variant="danger">{error}</Alert>}
               <Button variant="warning" disabled={loading} className="w-100" type="submit">
-                Registruj nalog
+                Prijavi se
               </Button>
             </Form>
+            <div className="w-100 text-center mt-3">
+              <Link className="text-warning" to="/forgot-password">Zaboravili ste lozinku?</Link>
+            </div>
           </Card.Body>
         </Card>
         <div className="w-100 text-center mt-2">
-          Već imate nalog? <Link to="/login">Prijavi se</Link>
+          Nemate nalog? <Link to="/login">Registruj se</Link>
         </div>
       </>
     )
   }
 
-  function signupCompleteMessage() {
+  function loginCompleteMessage() {
     return (
       <p>
-        Registracija je uspešno završena
+        Prijava je uspešno završena.<br/>
+        Sada možete kupovati proizvode.
       </p>
     )
   }

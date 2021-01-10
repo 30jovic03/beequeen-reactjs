@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button, Nav } from 'react-bootstrap';
 import { HashRouter, Link } from 'react-router-dom';
 import { useAuth } from '../firebase/AuthContext';
@@ -8,9 +8,18 @@ interface MainMenuProperties {
 }
 
 const MainMenu: React.FC<MainMenuProperties> = ({role}) => {
+  const [error, setError] = useState("")
+  const { currentUser, logout } = useAuth() as any;
 
-  const {currentUser} = useAuth() as any;
+  async function handleLogout() {
+    setError("")
 
+    try {
+      await logout()
+    } catch {
+      setError("Failed to log out")
+    }
+  }
   
   switch (role) {
     case 'user' : return( 
@@ -25,8 +34,6 @@ const MainMenu: React.FC<MainMenuProperties> = ({role}) => {
     );
   }
 
-  
-
   function getUserMenu() {
     return(
       <Nav variant="pills" className="nav-bar bg-secondary">
@@ -37,16 +44,19 @@ const MainMenu: React.FC<MainMenuProperties> = ({role}) => {
           <Link to='/contact/' className="nav-link text-warning">
           Kontakt
           </Link>
-          <Link to='/' className="nav-link text-warning">
-          Moje porudžbine
+          <Link to='/my-page' className="nav-link text-warning">
+          Moj nalog
           </Link>
           {/*<Cart />*/}
           <Link to='/administrator/dashboard/' className="nav-link text-warning">
           Admin
           </Link>
           <Button variant="secondary" className="nav-link text-warning">
-          {currentUser.email}
+          {currentUser ? currentUser.email : "niste prijavljeni"}
           </Button>
+          
+          {currentUser ? <Button variant="secondary" onClick={handleLogout} className="nav-link text-warning">Odjavi se</Button> : <Link to='/login' className="nav-link text-warning">Prijavi se</Link>}
+          
         </HashRouter>
       </Nav>
     )

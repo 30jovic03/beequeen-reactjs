@@ -17,6 +17,8 @@ import CategoryPage from './components/CategoryPage';
 import ArticlePage from './components/ArticlePage';
 import UserSignup from './components/UserSignup';
 import { AuthProvider } from './firebase/AuthContext';
+import UserLogin from './components/UserLogin';
+import MyPage from './components/MyPage';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -40,6 +42,8 @@ ReactDOM.render(
           <Switch>
             <Route exact path="/" component={ HomePage } />
             <Route path="/signup" component={UserSignup} />
+            <Route path="/login" component={UserLogin} />
+            <Route path="/my-page" component={MyPage} />
             <Route path="/category/:cId" component={ CategoryPage } />
             <Route path="/article/:aId" component={ ArticlePage } />
             <Route exact path="/administrator/dashboard" component={ AdministratorDashboard } />

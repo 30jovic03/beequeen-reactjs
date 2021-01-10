@@ -19,12 +19,10 @@ interface CategoryPageProperties {
 }
 
 interface CategoryPageState {
-  isUserLoggedIn: boolean;
   category?: CategoryType;
   subcategories?: CategoryType[];
   articles?: ArticleType[];
   previewArticles?: ArticleType[];
-  message: string;
   filters: {
     keywords: string;
     priceMinimum: number;
@@ -57,8 +55,6 @@ export default class CategoryPage extends React.Component<CategoryPageProperties
     super(props);
 
     this.state = {
-      isUserLoggedIn: true,
-      message: '',
       filters: {
         keywords: '',
         priceMinimum: 0.01,
@@ -73,22 +69,6 @@ export default class CategoryPage extends React.Component<CategoryPageProperties
   private setFeatures(features: ArticleFeatureType[]) {
     const newState = Object.assign(this.state, {
       features: features,
-    });
-
-    this.setState(newState);
-  }
-
-  private setLogginState(isLoggedIn: boolean) {
-    const newState = Object.assign(this.state, {
-      isUserLoggedIn: isLoggedIn,
-    });
-
-    this.setState(newState);
-  }
-
-  private setMessage(message: string) {
-    const newState = Object.assign(this.state, {
-      message: message,
     });
 
     this.setState(newState);
@@ -131,7 +111,6 @@ export default class CategoryPage extends React.Component<CategoryPageProperties
             </Card.Title>
           </Card.Header>
           <Card.Body>
-            { this.printOptionalMessage() }
             { this.showContent() }
           </Card.Body>
         </Card>
@@ -348,18 +327,6 @@ export default class CategoryPage extends React.Component<CategoryPageProperties
         selectedFeatures: newSelectedFeatures,
       })
     }));
-  }
-
-  private printOptionalMessage() {
-    if (this.state.message === '') {
-      return;
-    }
-
-    return (
-      <Card.Text>
-        { this.state.message }
-      </Card.Text>
-    )
   }
 
   private showContent() {
