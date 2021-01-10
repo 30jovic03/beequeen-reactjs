@@ -47,7 +47,7 @@ class HomePage extends React.Component {
         <MainMenu role='user' />
         
         <Container className="bg-secondary home-page">
-          <img src="https://firebasestorage.googleapis.com/v0/b/bee-queen.appspot.com/o/honey-clipart-realistic.png?alt=media&token=53885089-d838-4ea6-938e-fdcde84e762c" alt="honey" />
+          <img className="honey-img" src="https://firebasestorage.googleapis.com/v0/b/bee-queen.appspot.com/o/honey-clipart-realistic.png?alt=media&token=53885089-d838-4ea6-938e-fdcde84e762c" alt="honey" />
           <ul id="grid" className="clear">
             { this.state.categories.map(this.singleCategory) }
           </ul>

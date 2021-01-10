@@ -15,6 +15,8 @@ import AdministratorDashboardFeature from './components/AdministratorDashboardFe
 import AdministratorDashboardArticle from './components/AdministratorDashboardArticle';
 import CategoryPage from './components/CategoryPage';
 import ArticlePage from './components/ArticlePage';
+import UserSignup from './components/UserSignup';
+import { AuthProvider } from './firebase/AuthContext';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -34,15 +36,18 @@ ReactDOM.render(
       </div>
       <div className="component">
       <HashRouter>
-        <Switch>
-          <Route exact path="/" component={ HomePage } />
-          <Route path="/category/:cId" component={ CategoryPage } />
-          <Route path="/article/:aId" component={ ArticlePage } />
-          <Route exact path="/administrator/dashboard" component={ AdministratorDashboard } />
-          <Route path="/administrator/dashboard/category" component={ AdministratorDashboardCategory } />
-          <Route path="/administrator/dashboard/feature/:cId" component={ AdministratorDashboardFeature } />
-          <Route path="/administrator/dashboard/article" component={ AdministratorDashboardArticle } />
-        </Switch>
+        <AuthProvider>
+          <Switch>
+            <Route exact path="/" component={ HomePage } />
+            <Route path="/signup" component={UserSignup} />
+            <Route path="/category/:cId" component={ CategoryPage } />
+            <Route path="/article/:aId" component={ ArticlePage } />
+            <Route exact path="/administrator/dashboard" component={ AdministratorDashboard } />
+            <Route path="/administrator/dashboard/category" component={ AdministratorDashboardCategory } />
+            <Route path="/administrator/dashboard/feature/:cId" component={ AdministratorDashboardFeature } />
+            <Route path="/administrator/dashboard/article" component={ AdministratorDashboardArticle } />
+          </Switch>
+        </AuthProvider>
       </HashRouter>
       </div>
       

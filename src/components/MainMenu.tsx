@@ -1,29 +1,33 @@
 import React from 'react';
-import { Nav } from 'react-bootstrap';
+import { Button, Nav } from 'react-bootstrap';
 import { HashRouter, Link } from 'react-router-dom';
+import { useAuth } from '../firebase/AuthContext';
 
 interface MainMenuProperties {
   role: 'user' | 'administrator';
 }
 
-export default class MainMenu extends React.Component<MainMenuProperties> {
-  render() {
-    switch (this.props.role) {
-      case 'user' : return( 
-        <>
-          {this.getUserMenu()}
-        </>
-      );
-      case 'administrator' : return(
-        <>
-        {this.getAdministratorMenu()}
-        </>
-      );
-    }
+const MainMenu: React.FC<MainMenuProperties> = ({role}) => {
 
+  const {currentUser} = useAuth() as any;
+
+  
+  switch (role) {
+    case 'user' : return( 
+      <>
+        {getUserMenu()}
+      </>
+    );
+    case 'administrator' : return(
+      <>
+      {getAdministratorMenu()}
+      </>
+    );
   }
 
-  getUserMenu() {
+  
+
+  function getUserMenu() {
     return(
       <Nav variant="pills" className="nav-bar bg-secondary">
         <HashRouter>
@@ -40,12 +44,15 @@ export default class MainMenu extends React.Component<MainMenuProperties> {
           <Link to='/administrator/dashboard/' className="nav-link text-warning">
           Admin
           </Link>
+          <Button variant="secondary" className="nav-link text-warning">
+          {currentUser.email}
+          </Button>
         </HashRouter>
       </Nav>
     )
   }
 
-  getAdministratorMenu() {
+  function getAdministratorMenu() {
     return(
       <Nav variant="pills" className="bg-secondary">
         <HashRouter>
@@ -69,3 +76,5 @@ export default class MainMenu extends React.Component<MainMenuProperties> {
     )
   }
 }
+
+export default MainMenu;
