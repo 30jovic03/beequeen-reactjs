@@ -19,6 +19,9 @@ import UserSignup from './components/UserSignup';
 import { AuthProvider } from './firebase/AuthContext';
 import UserLogin from './components/UserLogin';
 import MyPage from './components/MyPage';
+import AdministratorLogin from './components/AdministratorLogin';
+import About from './components/About';
+import Contact from './components/Contact';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -41,11 +44,14 @@ ReactDOM.render(
         <AuthProvider>
           <Switch>
             <Route exact path="/" component={ HomePage } />
+            <Route path="/about" component={About} />
+            <Route path="/contact" component={Contact} />
             <Route path="/signup" component={UserSignup} />
             <Route path="/login" component={UserLogin} />
             <Route path="/my-page" component={MyPage} />
             <Route path="/category/:cId" component={ CategoryPage } />
             <Route path="/article/:aId" component={ ArticlePage } />
+            <Route path="/admin-login" component={ AdministratorLogin } />
             <Route exact path="/administrator/dashboard" component={ AdministratorDashboard } />
             <Route path="/administrator/dashboard/category" component={ AdministratorDashboardCategory } />
             <Route path="/administrator/dashboard/feature/:cId" component={ AdministratorDashboardFeature } />

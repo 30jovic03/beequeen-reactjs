@@ -6,7 +6,6 @@ import MainMenu from "./MainMenu"
 
 export default function Dashboard() {
   const [error, setError] = useState("")
-  const [loggedIn, setLoggedIn] = useState(true)
   const { currentUser, logout } = useAuth()
 
   async function handleLogout() {
@@ -17,8 +16,6 @@ export default function Dashboard() {
     } catch {
       setError("Failed to log out")
     }
-
-    setLoggedIn(false)
   }
 
   return (
@@ -31,9 +28,9 @@ export default function Dashboard() {
       >
         <div className="w-100" style={{ maxWidth: "400px" }}>
           {
-            (loggedIn === true) ?
+            currentUser ?
             dashboard() :
-            logoutCompleteMessage()
+            loggedOutMessage()
           }
         </div>
       </Container>
@@ -64,11 +61,16 @@ export default function Dashboard() {
     )
   }
 
-  function logoutCompleteMessage() {
+  function loggedOutMessage() {
     return (
-      <p>
-        Odjava je uspešno završena.
-      </p>
+      <div className="text-center mt-2">
+        <p className="text-center">
+          Niste prijavljeni.
+        </p>
+        <Link to="/login" className="btn btn-secondary w-25 mt-3">
+          Prijavi se
+        </Link>
+      </div>
     )
   }
 }

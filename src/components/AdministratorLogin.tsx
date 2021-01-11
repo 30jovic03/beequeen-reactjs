@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react"
 import { Form, Button, Card, Alert, Container } from "react-bootstrap"
 import { useAuth } from "../firebase/AuthContext"
-import { Link } from "react-router-dom"
+import { Redirect } from "react-router-dom"
 import MainMenu from "./MainMenu"
 
 export default function Login() {
@@ -38,9 +38,9 @@ export default function Login() {
       >
         <div className="w-100" style={{ maxWidth: "400px" }}>
           {
-            !currentUser ?
-            loginForm() :
-            loginCompleteMessage()
+            (currentUser?.email === "admin@beequeen.com") ?
+            <Redirect to="/administrator/dashboard" />
+            : loginForm()
           }
         </div>
       </Container>
@@ -52,7 +52,7 @@ export default function Login() {
       <>
         <Card>
           <Card.Header style={{ border: "3px solid #6c757d"}} className="bg-warning">
-            <Card.Title className="text-center">Prijava korisnika</Card.Title>
+            <Card.Title className="text-center">Prijava administratora</Card.Title>
           </Card.Header>
           <Card.Body className="bg-secondary text-light">
             <Form onSubmit={handleSubmit}>
@@ -69,31 +69,16 @@ export default function Login() {
                 Prijavi se
               </Button>
             </Form>
-            <div className="w-100 text-center mt-3">
-              <Link className="text-warning" to="/forgot-password">Zaboravili ste lozinku?</Link>
-            </div>
-            <div className="w-100 text-center mt-2">
-              Nemate nalog? <Link className="text-warning" to="/signup">Registruj se</Link>
-            </div>
           </Card.Body>
         </Card>
-        <div className="w-100 text-center mt-3">
+        <div className="w-100 text-center mt-2">
           <p>
-          Ovo je demo sajt. Ako ne želite da napravite nalog možete se prijaviti pomoću:<br/>
-          Email: test@beequeen.com<br/>
+          Ovo je demo sajt. Možete se prijaviti kao admin pomoću:<br/>
+          Email: admin@beequeen.com<br/>
           Lozinka: 123456
           </p>
         </div>
       </>
-    )
-  }
-
-  function loginCompleteMessage() {
-    return (
-      <p className="text-center">
-        Prijava je uspešno završena.<br/>
-        Sada možete kupovati proizvode.
-      </p>
     )
   }
 }

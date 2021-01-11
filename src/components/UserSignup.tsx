@@ -8,9 +8,8 @@ export default function UserSignup() {
   const emailRef = useRef<HTMLInputElement>(null)
   const passwordRef = useRef<HTMLInputElement>(null)
   const passwordConfirmRef = useRef<HTMLInputElement>(null)
-  const { signup } = useAuth() as any
+  const { currentUser, signup } = useAuth() as any
   const [error, setError] = useState("")
-  const [signupComplete, setSignupComplete] = useState(false)
   const [loading, setLoading] = useState(false)
 
   async function handleSubmit(e: { preventDefault: () => void }) {
@@ -35,7 +34,6 @@ export default function UserSignup() {
       }
   
       setLoading(false)
-      setSignupComplete(true)
     }
   }
 
@@ -49,7 +47,7 @@ export default function UserSignup() {
       >
         <div className="w-100" style={{ maxWidth: "400px" }}>
           {
-            (signupComplete === false) ?
+            !currentUser ?
             signupForm() :
             signupCompleteMessage()
           }
@@ -95,7 +93,7 @@ export default function UserSignup() {
 
   function signupCompleteMessage() {
     return (
-      <p>
+      <p className="text-center">
         Registracija je uspešno završena
       </p>
     )

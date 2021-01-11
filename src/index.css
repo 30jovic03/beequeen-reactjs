@@ -165,7 +165,16 @@ position: relative;
     font-size: 11px;
   }
 }
-
+/* about */
+.company{
+  margin-left: 5px;
+  float: right;
+  width: 40%;
+}
+/* contact */
+.contact-img{
+  width: 100%;
+}
 /* admin article img modal styles */
 .backdrop{
   background: rgba(61, 61, 61, 0.5);
