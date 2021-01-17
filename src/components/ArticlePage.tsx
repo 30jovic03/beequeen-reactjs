@@ -6,7 +6,7 @@ import { faBoxOpen } from '@fortawesome/free-solid-svg-icons';
 import ArticleType from '../types/ArticleType';
 import { projectFirestore } from '../firebase/config';
 import ArticleFeatureType from '../types/ArticleFeatureType';
-//import AddToCartInput from '../AddToCartInput/AddToCartInput';
+import AddToCartInput from './AddToCartInput';
 
 interface ArticlePageProperties {
   match: {
@@ -180,7 +180,7 @@ export default class ArticlePage extends React.Component<ArticlePageProperties> 
           </Row>
           <Row>
             <Col xs="12" className="mt-3">
-              {/*<AddToCartInput article={ article } />*/}
+              <AddToCartInput article={ article } />
             </Col>
           </Row>
         </Col>

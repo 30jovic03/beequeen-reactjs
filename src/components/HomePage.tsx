@@ -2,7 +2,7 @@ import React from 'react';
 import { Container } from 'react-bootstrap';
 import CategoryType from '../types/CategoryType';
 import { Link } from 'react-router-dom';
-import { projectFirestore } from '../firebase/config';
+import { auth, projectFirestore } from '../firebase/config';
 import MainMenu from './MainMenu';
 
 interface HomePageState {
@@ -20,8 +20,14 @@ class HomePage extends React.Component {
     };
   }
 
+  private getUser() {
+    let user = auth.currentUser;
+    console.log(user);
+  }
+
   componentDidMount() {
     this.getCategories();
+    this.getUser();
   }
 
   private getCategories() {

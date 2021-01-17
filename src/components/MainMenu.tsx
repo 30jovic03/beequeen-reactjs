@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { Button, Dropdown, Navbar } from 'react-bootstrap';
 import { HashRouter, Link, Redirect } from 'react-router-dom';
 import { useAuth } from '../firebase/AuthContext';
+import Cart from './Cart';
 
 interface MainMenuProperties {
   role: 'user' | 'administrator';
@@ -61,7 +62,7 @@ const MainMenu: React.FC<MainMenuProperties> = ({role}) => {
           <Link to='/my-page' className="mr-auto nav-link text-warning">
           Moj nalog
           </Link>
-          {/*<Cart />*/}
+          <Cart />
           <Dropdown>
             <Dropdown.Toggle variant="secondary" className="nav-link secondary text-warning">
               {currentUser ? 

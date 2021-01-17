@@ -31,7 +31,7 @@ export default function About() {
                   <Form.Label>Poruka:</Form.Label>
                   <Form.Control as="textarea" rows={3}/>
                 </Form.Group>
-                <Button variant="warning" className="w-100" type="submit">
+                <Button variant="warning" className="w-100">
                   Pošalji
                 </Button>
               </Form>

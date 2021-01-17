@@ -197,14 +197,7 @@ export default class CategoryPage extends React.Component<CategoryPageProperties
   private applyFilters() {
     let articles: any[] = [];
     this.state.articles?.map(article => {
-        articles.push({
-          articleId: article.articleId,
-          name: article.name,
-          price: article.price,
-          excerpt: article.excerpt,
-          imageUrl: article.imageUrl,
-          features: article.features
-        })
+        articles.push(article)
       return articles;
     });
 

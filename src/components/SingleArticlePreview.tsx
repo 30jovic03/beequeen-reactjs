@@ -2,7 +2,7 @@ import React from 'react';
 import { Col, Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import ArticleType from '../types/ArticleType';
-//import AddToCartInput from '../AddToCartInput/AddToCartInput';
+import AddToCartInput from './AddToCartInput';
 
 interface SingleArticlePreviewProperties {
   article: ArticleType,
@@ -30,7 +30,7 @@ export default class SingleArticlePreview extends React.Component<SingleArticleP
               Cena: { Number(this.props.article.price).toFixed(2) } RSD
             </Card.Text>
 
-            {/*<AddToCartInput article={ this.props.article } />*/}
+            <AddToCartInput article={ this.props.article } />
             
             <Link to={ `/article/${ this.props.article.articleId }` }
                   className="btn btn-warning btn-block btn-sm">
