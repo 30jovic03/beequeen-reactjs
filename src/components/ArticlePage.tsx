@@ -17,7 +17,6 @@ interface ArticlePageProperties {
 }
 
 interface ArticlePageState {
-  isUserLoggedIn: boolean;
   message: string;
   article?: ArticleType;
 }
@@ -29,17 +28,8 @@ export default class ArticlePage extends React.Component<ArticlePageProperties> 
     super(props);
 
     this.state = {
-      isUserLoggedIn: true,
       message: '',
     }
-  }
-
-  private setLogginState(isLoggedIn: boolean) {
-    const newState = Object.assign(this.state, {
-      isUserLoggedIn: isLoggedIn,
-    });
-
-    this.setState(newState);
   }
 
   private setMessage(message: string) {

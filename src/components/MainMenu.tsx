@@ -2,7 +2,6 @@ import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState } from 'react';
 import { Button, Dropdown, Navbar } from 'react-bootstrap';
-import DropdownMenu from 'react-bootstrap/esm/DropdownMenu';
 import { HashRouter, Link, Redirect } from 'react-router-dom';
 import { useAuth } from '../firebase/AuthContext';
 import Cart from './Cart';
@@ -68,7 +67,7 @@ const MainMenu: React.FC<MainMenuProperties> = ({role}) => {
           Kontakt
           </Link>
           <Link to='/my-page' className="mr-auto nav-link text-warning">
-          Moj nalog
+          Moj profil
           </Link>
           <Cart />
           <Dropdown>

@@ -18,7 +18,7 @@ export default function Cart() {
     if (currentUser) {
       updateCart();
     }
-  }, [currentUser])
+  }, [currentUser, updateCart])
 
   if (currentUser) {
     window.addEventListener("cart.update", () => updateCart());
@@ -104,7 +104,7 @@ export default function Cart() {
           "ordered": true,
         })
 
-        setMessage('Porudžbina je uspešno obavljena. Status Vaše porudžbine možete pratiti na stranici >Moj nalog<.');
+        setMessage('Porudžbina je uspešno obavljena. Status Vaše porudžbine možete pratiti na stranici >Moj profil<.');
 
         setCart(null);
         setCount(0);

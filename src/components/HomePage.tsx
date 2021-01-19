@@ -20,14 +20,8 @@ class HomePage extends React.Component {
     };
   }
 
-  private getUser() {
-    let user = auth.currentUser;
-    console.log(user);
-  }
-
   componentDidMount() {
     this.getCategories();
-    this.getUser();
   }
 
   private getCategories() {

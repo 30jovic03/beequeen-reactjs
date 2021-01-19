@@ -8,7 +8,6 @@ import { projectFirestore, projectStorage } from '../firebase/config';
 import MainMenu from './MainMenu';
 
 interface AdministratorDashboardCategoryState {
-  isAdministratorLoggedIn: boolean;
   categories: CategoryType[];
 
   addModal: {
@@ -34,7 +33,6 @@ class AdministratorDashboardCategory extends React.Component {
     super(props);
 
     this.state = {
-      isAdministratorLoggedIn: true,
       categories: [],
 
       addModal: {
@@ -104,12 +102,6 @@ class AdministratorDashboardCategory extends React.Component {
 
     this.setState(Object.assign(this.state, {
       categories: data,
-    }));
-  }
-
-  private setLogginState(isLoggedIn: boolean) {
-    this.setState(Object.assign(this.state, {
-      isAdministratorLoggedIn: isLoggedIn,
     }));
   }
 

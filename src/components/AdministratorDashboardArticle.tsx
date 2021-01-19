@@ -11,7 +11,6 @@ import MainMenu from './MainMenu';
 import ArticleFeatureType from '../types/ArticleFeatureType';
 
 interface AdministratorDashboardArticleState {
-  isAdministratorLoggedIn: boolean;
   articles: ArticleType[];
   categories: CategoryType[];
   selectedImg?: {
@@ -71,7 +70,6 @@ class AdministratorDashboardArticle extends React.Component {
     super(props);
 
     this.state = {
-      isAdministratorLoggedIn: true,
       articles: [],
       categories: [],
       selectedImg: {
@@ -277,12 +275,6 @@ class AdministratorDashboardArticle extends React.Component {
 
     this.setState(Object.assign(this.state, {
       articles: data,
-    }));
-  }
-
-  private setLogginState(isLoggedIn: boolean) {
-    this.setState(Object.assign(this.state, {
-      isAdministratorLoggedIn: isLoggedIn,
     }));
   }
 

@@ -17,7 +17,6 @@ interface AdministratorDashboardFeatureProperties {
 }
 
 interface AdministratorDashboardFeatureState {
-  isAdministratorLoggedIn: boolean;
   features: FeatureType[];
   thisCategoryName: string;
 
@@ -42,7 +41,6 @@ class AdministratorDashboardFeature extends React.Component<AdministratorDashboa
     super(props);
 
     this.state = {
-      isAdministratorLoggedIn: true,
       features: [],
       thisCategoryName: '',
 
@@ -141,12 +139,6 @@ class AdministratorDashboardFeature extends React.Component<AdministratorDashboa
         thisCategoryName: categoryName,
       }));
     });
-  }
-
-  private setLogginState(isLoggedIn: boolean) {
-    this.setState(Object.assign(this.state, {
-      isAdministratorLoggedIn: isLoggedIn,
-    }));
   }
 
   render() {
