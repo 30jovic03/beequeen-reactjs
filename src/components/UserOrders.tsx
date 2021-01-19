@@ -14,7 +14,7 @@ export default function UserOrders() {
   const [cart, setCart] = useState<CartType | null>(null)
 
   useEffect(() => {
-    if (currentUser) {
+    if (currentUser?.email === "admin@beequeen.com") {
       getOrders();
     }
   }, [currentUser])
