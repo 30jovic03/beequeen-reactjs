@@ -18,7 +18,7 @@ export default function Cart() {
     if (currentUser) {
       updateCart();
     }
-  }, [currentUser, updateCart()])
+  }, [])
 
   if (currentUser) {
     window.addEventListener("cart.update", () => updateCart());

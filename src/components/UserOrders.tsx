@@ -17,7 +17,7 @@ export default function UserOrders() {
     if (currentUser) {
       getOrders();
     }
-  }, [currentUser, getOrders()])
+  }, [currentUser])
 
   function getOrders() {
     projectFirestore.collection("orders").where("userId", "==", currentUser?.uid).get().then((querySnapshot) => {
