@@ -14,10 +14,10 @@ export default function UserOrders() {
   const [cart, setCart] = useState<CartType | null>(null)
 
   useEffect(() => {
-    if (currentUser?.email === "admin@beequeen.com") {
+    if (currentUser) {
       getOrders();
     }
-  }, [currentUser])
+  }, [currentUser, getOrders])
 
   function getOrders() {
     projectFirestore.collection("orders").where("userId", "==", currentUser?.uid).get().then((querySnapshot) => {
