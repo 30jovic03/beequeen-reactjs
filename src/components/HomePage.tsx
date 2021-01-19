@@ -2,7 +2,7 @@ import React from 'react';
 import { Container } from 'react-bootstrap';
 import CategoryType from '../types/CategoryType';
 import { Link } from 'react-router-dom';
-import { auth, projectFirestore } from '../firebase/config';
+import { projectFirestore } from '../firebase/config';
 import MainMenu from './MainMenu';
 
 interface HomePageState {
