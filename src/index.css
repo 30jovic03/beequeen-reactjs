@@ -37,8 +37,26 @@ position: relative;
   }
 }
 
-/* HomePage */
+/* MainMenu */
+.nav-home{
+  color: #ffc107;
+}
+.nav-home:hover{
+  color:  rgb(182, 133, 0);
+}
+@media only screen and (max-width: 920px) {
+  .nav-home{
+    color: black;
+    background-color: #ffc107;
+    border-radius: 5%;
+  }
+  .nav-home:hover{
+    color: black;
+    background-color: rgb(235, 161, 1);
+  }
+}
 
+/* HomePage */
 .home-page {
   min-height: 93vh;
 }
@@ -47,7 +65,6 @@ position: relative;
 }
 
 /* HomePage hexagonal grid */
-
 #grid {
   position: relative;
   width: 70%;
@@ -186,4 +203,11 @@ position: relative;
   margin: 10px auto;
   box-shadow: 3px 5px 7px rgba(0,0,0,0.5);
   border: 3px solid white;
+}
+/* admin orders */
+.nav-tabs .nav-item.nav-link {
+  color: white;
+}
+.nav-tabs .nav-item.nav-link.active {
+  background-color: #fdbf00;
 }

@@ -22,6 +22,7 @@ import MyPage from './components/MyPage';
 import AdministratorLogin from './components/AdministratorLogin';
 import About from './components/About';
 import Contact from './components/Contact';
+import AdministratorDashboardOrder from './components/AdministratorDashboardOrder';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -56,6 +57,7 @@ ReactDOM.render(
             <Route path="/administrator/dashboard/category" component={ AdministratorDashboardCategory } />
             <Route path="/administrator/dashboard/feature/:cId" component={ AdministratorDashboardFeature } />
             <Route path="/administrator/dashboard/article" component={ AdministratorDashboardArticle } />
+            <Route path="/administrator/dashboard/order" component={ AdministratorDashboardOrder } />
           </Switch>
         </AuthProvider>
       </HashRouter>

@@ -2,6 +2,7 @@ import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState } from 'react';
 import { Button, Dropdown, Navbar } from 'react-bootstrap';
+import DropdownMenu from 'react-bootstrap/esm/DropdownMenu';
 import { HashRouter, Link, Redirect } from 'react-router-dom';
 import { useAuth } from '../firebase/AuthContext';
 import Cart from './Cart';
@@ -43,15 +44,22 @@ const MainMenu: React.FC<MainMenuProperties> = ({role}) => {
 
   function getUserMenu() {
     return(
-      <Navbar expand="lg" className="nav-bar d-flex bg-secondary">
+      <Navbar collapseOnSelect expand="lg" className="nav-bar d-flex bg-secondary">
         <HashRouter>
-          <Link to='/' className="nav-link text-warning">
+          <Link to='/' className="nav-home nav-link">
           Početna
           </Link>
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" className="bg-warning" />
+          <Navbar.Collapse id="responsive-navbar-nav">
           <Dropdown>
             <Dropdown.Toggle variant="secondary" className="nav-link secondary text-warning">
             Proizvodi
             </Dropdown.Toggle>
+            <Dropdown.Menu className="bg-secondary">
+              <>
+              { dropdownMenu() }
+              </>
+            </Dropdown.Menu>
           </Dropdown>
           <Link to='/about' className="nav-link text-warning">
           O nama
@@ -74,14 +82,16 @@ const MainMenu: React.FC<MainMenuProperties> = ({role}) => {
               {currentUser ? 
                 <Button onClick={handleLogout} variant="outline-warning" className="w-100">Odjavi se</Button> 
                 : <>
-                <Link to='/login' className="btn btn-outline-warning w-100">Prijavi se</Link>
-                <Link to='/signup' className="btn btn-outline-warning w-100 mt-2">Registruj se</Link></>
+                <Link to='/login' className="btn btn-outline-warning w-100 mb-2">Prijavi se</Link>
+                <Link to='/signup' className="btn btn-outline-warning w-100">Registruj se</Link></>
               }
             </Dropdown.Menu>
           </Dropdown>
           <Link to='/admin-login' className="nav-link text-warning">
           Admin
           </Link>
+          </Navbar.Collapse>
+          
         </HashRouter>
       </Navbar>
     )
@@ -112,6 +122,52 @@ const MainMenu: React.FC<MainMenuProperties> = ({role}) => {
 
     return(
       <Redirect to="/" />
+    )
+  }
+
+  function dropdownMenu() {
+    return(
+      <>
+        <Dropdown>
+          <Dropdown.Toggle variant="secondary" className="nav-link secondary text-warning">
+          Pčelinji proizvodi
+          </Dropdown.Toggle>
+          <Dropdown.Menu className="ml-5 bg-secondary">
+            <Link to='/login' className="nav-link secondary text-warning mb-1">Med</Link>
+            <Link to='/login' className="nav-link secondary text-warning mb-1">Ostali proizvodi</Link>
+          </Dropdown.Menu>
+        </Dropdown>
+        <Link to='/category/1Q7Td0Fn6WquVDHWLc6F' className="nav-link secondary text-warning mb-1">Košnice</Link>
+        <Dropdown>
+          <Dropdown.Toggle variant="secondary" className="nav-link secondary text-warning">
+          Oprema za košnice
+          </Dropdown.Toggle>
+          <Dropdown.Menu className="ml-5 bg-secondary">
+            <Link to='/' className="nav-link secondary text-warning mb-1">Razmaci i nosači ramova</Link>
+            <Link to='/' className="nav-link secondary text-warning mb-1">Češljevi i regulatori leta</Link>
+            <Link to='/' className="nav-link secondary text-warning mb-1">Hranilice i pojila</Link>
+            <Link to='/' className="nav-link secondary text-warning mb-1">Matične rešetke</Link>
+            <Link to='/' className="nav-link secondary text-warning mb-1">Sakupljači polena, propolisa i perge</Link>
+          </Dropdown.Menu>
+        </Dropdown>
+        <Dropdown>
+          <Dropdown.Toggle variant="secondary" className="nav-link secondary text-warning">
+          Pčelarski alat
+          </Dropdown.Toggle>
+          <Dropdown.Menu className="ml-5 bg-secondary">
+            <Link to='/' className="nav-link secondary text-warning mb-1">Pčelarski noževi i klešta</Link>
+            <Link to='/' className="nav-link secondary text-warning mb-1">Dimilice</Link>
+            <Link to='/' className="nav-link secondary text-warning mb-1">Četke za pčele</Link>
+            <Link to='/' className="nav-link secondary text-warning mb-1">Bežalice</Link>
+            <Link to='/' className="nav-link secondary text-warning mb-1">Pribor za ožičavanje ramova</Link>
+          </Dropdown.Menu>
+        </Dropdown>
+        <Link to='/' className="nav-link secondary text-warning mb-1">Zaštitna oprema</Link>
+        <Link to='/' className="nav-link secondary text-warning mb-1">Oprema za vrcanje</Link>
+        <Link to='/' className="nav-link secondary text-warning mb-1">Matice i rojevi</Link>
+        <Link to='/' className="nav-link secondary text-warning mb-1">Satne osnove</Link>
+        <Link to='/' className="nav-link secondary text-warning mb-1">Ostalo</Link>
+      </>
     )
   }
 }

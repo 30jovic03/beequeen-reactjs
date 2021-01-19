@@ -5,7 +5,6 @@ import { Col, Form, Button, Row, OverlayTrigger, Tooltip } from 'react-bootstrap
 import { useAuth } from '../firebase/AuthContext';
 import { projectFirestore, timestamp } from '../firebase/config';
 import ArticleType from '../types/ArticleType';
-import CartType from '../types/CartType';
 
 interface AddToCartInputProperties {
   article: ArticleType,

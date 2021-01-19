@@ -18,7 +18,7 @@ export default function Cart() {
     if (currentUser) {
       updateCart();
     }
-  }, [])
+  }, [currentUser])
 
   if (currentUser) {
     window.addEventListener("cart.update", () => updateCart());
@@ -95,7 +95,8 @@ export default function Cart() {
     if (cart && (cart?.cartArticles.length > 0)) {
       const createdAt = timestamp();
       projectFirestore.collection("orders").add({
-        cartId: cart?.cartId,
+        cartId: cart.cartId,
+        userId: cart.userId,
         createdAt: createdAt,
         status: "pending"
       }).then(() => {

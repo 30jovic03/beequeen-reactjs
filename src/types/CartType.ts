@@ -1,8 +1,8 @@
 type CartType = {
   cartId: string;
-  userId: string;
+  userId?: string;
   createdAt: any;
-  ordered: boolean;
+  ordered?: boolean;
   cartArticles: {
     cartArticleId: string;
     articleId: string;

@@ -1,8 +1,9 @@
 import React, { useState } from "react"
-import { Card, Button, Alert, Container } from "react-bootstrap"
+import { Card, Button, Alert, Container, Row, Col } from "react-bootstrap"
 import { useAuth } from "../firebase/AuthContext"
 import { Link } from "react-router-dom"
 import MainMenu from "./MainMenu"
+import UserOrders from "./UserOrders"
 
 export default function Dashboard() {
   const [error, setError] = useState("")
@@ -22,17 +23,12 @@ export default function Dashboard() {
     <Container>
       <MainMenu role='user' />
       <img className="honey-img" src="https://firebasestorage.googleapis.com/v0/b/bee-queen.appspot.com/o/honey-clipart-realistic.png?alt=media&token=53885089-d838-4ea6-938e-fdcde84e762c" alt="honey" />
-      <Container
-        className="d-flex align-items-center justify-content-center"
-        style={{ minHeight: "30vh" }}
-      >
-        <div className="w-100" style={{ maxWidth: "400px" }}>
-          {
-            currentUser ?
-            dashboard() :
-            loggedOutMessage()
-          }
-        </div>
+      <Container>
+        {
+          currentUser ?
+          dashboard() :
+          loggedOutMessage()
+        }
       </Container>
     </Container>
   )
@@ -46,17 +42,24 @@ export default function Dashboard() {
           </Card.Header>
           <Card.Body className="bg-secondary text-light">
             {error && <Alert variant="danger">{error}</Alert>}
-            <strong>Email:</strong> {currentUser?.email}
-            <Link to="/update-profile" className="btn btn-warning w-100 mt-3">
-              Izmeni profil
-            </Link>
+            <Row className="mb-4">
+              <Col lg="6" className="mb-2 text-center">
+                <strong>Email:</strong> {currentUser?.email}
+              </Col>
+              <Col lg="3">
+                <Link to="/update-profile" className="btn btn-warning w-100 mb-2">
+                  Izmeni profil
+                </Link>
+              </Col>
+              <Col lg="3">
+                <Button className="w-100" variant="warning" onClick={handleLogout}>
+                  Odjavi se
+                </Button>
+              </Col>
+            </Row>
+        <UserOrders />
           </Card.Body>
         </Card>
-        <div className="w-100 text-center mt-2">
-          <Button variant="link" onClick={handleLogout}>
-            Odjavi se
-          </Button>
-        </div>
       </>
     )
   }

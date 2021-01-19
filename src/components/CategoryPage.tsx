@@ -104,7 +104,7 @@ export default class CategoryPage extends React.Component<CategoryPageProperties
       <Container>
         <MainMenu role='user' />
 
-        <Card className="bg-secondary">
+        <Card className="home-page bg-secondary">
           <Card.Header className="bg-warning">
             <Card.Title>
             <FontAwesomeIcon icon={ faListAlt } /> { this.state.category?.name }
@@ -134,9 +134,9 @@ export default class CategoryPage extends React.Component<CategoryPageProperties
             <Col xs="12" sm="6">
               <Form.Label htmlFor="priceMin">Min cena:</Form.Label>
               <Form.Control type="number" id="priceMin"
-                            step="0.01" min="0.01" max="99999.99"
-                            value={ this.state.filters.priceMinimum }
-                            onChange={ (e) => this.filterPriceMinChanged(e as any) } />
+              step="0.01" min="0.01" max="99999.99"
+              value={ this.state.filters.priceMinimum }
+              onChange={ (e) => this.filterPriceMinChanged(e as any) } />
             </Col>
             <Col xs="12" sm="6">
              <Form.Label htmlFor="priceMax">Max cena:</Form.Label>
@@ -343,9 +343,12 @@ export default class CategoryPage extends React.Component<CategoryPageProperties
 
   private showSubcategories() {
     return (
+      <>
+      <img className="honey-img" src="https://firebasestorage.googleapis.com/v0/b/bee-queen.appspot.com/o/honey-clipart-realistic.png?alt=media&token=53885089-d838-4ea6-938e-fdcde84e762c" alt="honey" />
       <ul id="grid" className="clear">
         { this.state.subcategories?.map(this.singleCategory) }
       </ul>
+      </>
     );
   }
 
@@ -365,7 +368,7 @@ export default class CategoryPage extends React.Component<CategoryPageProperties
   private showArticles() {
     if (this.state.articles?.length === 0) {
       return (
-        <div>Trenutno nema ni jedan proizvod.</div>
+        <div className="text-light">Trenutno nema ni jedan proizvod.</div>
       );
     }
 
