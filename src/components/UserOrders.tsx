@@ -15,9 +15,10 @@ export default function UserOrders() {
 
   useEffect(() => {
     if (currentUser) {
-      getOrders();
+      const unsubscribe = getOrders();
+      return unsubscribe
     }
-  }, [currentUser, getOrders])
+  }, [currentUser])
 
   function getOrders() {
     projectFirestore.collection("orders").where("userId", "==", currentUser?.uid).get().then((querySnapshot) => {

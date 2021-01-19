@@ -16,9 +16,10 @@ export default function Cart() {
 
   useEffect(() => {
     if (currentUser) {
-      updateCart();
+      const unsubscribe = updateCart();
+      return unsubscribe
     }
-  }, [currentUser, updateCart])
+  }, [currentUser])
 
   if (currentUser) {
     window.addEventListener("cart.update", () => updateCart());
