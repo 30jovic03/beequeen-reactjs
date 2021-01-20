@@ -14,20 +14,13 @@ export default function Cart() {
   const [message, setMessage] = useState("")
   const [cartMenuColor, setCartMenuColor] = useState('#ffbb00')
 
-  useEffect(() => {
-    if (currentUser) {
-      const unsubscribe = updateCart();
-      return unsubscribe
-    }
-  }, [currentUser])
-
   if (currentUser) {
-    window.addEventListener("cart.update", () => updateCart());
+    window.addEventListener("cart.update", () => getCart());
   } else {
-    window.removeEventListener("cart.update", () => updateCart());
+    window.removeEventListener("cart.update", () => getCart());
   }
 
-  function updateCart() {
+  function getCart() {
     let unorderedCart: any; 
     projectFirestore.collection("carts").where("userId", "==", currentUser?.uid).where("ordered", "==", false).get().then((querySnapshot) => {
       let documents: any[] = [];
@@ -81,7 +74,7 @@ export default function Cart() {
       "quantity": newQuantity,
     })
 
-    updateCart();
+    getCart();
   }
 
   function removeFromCart(articleId: string) {
@@ -89,7 +82,7 @@ export default function Cart() {
 
     projectFirestore.collection("cartArticles").doc(cartArticle?.cartArticleId).delete();
 
-    updateCart();
+    getCart();
   }
 
   function makeOrder() {
@@ -121,11 +114,15 @@ export default function Cart() {
     setVisible(false);
   }
 
+  function showCart() {
+    getCart();
+    setVisible(true);
+  }
+
   const MessageLink = () => (
     <OverlayTrigger placement='bottom' overlay={<Tooltip id="tooltip-disabled">Morate biti prijavljeni da biste pristupili korpi.</Tooltip>}>
       <span className="d-inline-block" style={{ width: '100%' }}>
-        <Nav.Link active={ false } 
-                  onClick={ () => setVisible(true) }
+        <Nav.Link active={ false }
                   style={ { color: cartMenuColor, pointerEvents: 'none' } }>
           <FontAwesomeIcon icon={ faCartArrowDown } /> ({ count })
         </Nav.Link>
@@ -139,7 +136,7 @@ export default function Cart() {
         {
           currentUser ?
           <Nav.Link active={ false } 
-                    onClick={ () => setVisible(true) }
+                    onClick={ () => showCart() }
                     style={ { color: cartMenuColor } }>
             <FontAwesomeIcon icon={ faCartArrowDown } /> ({ count })
           </Nav.Link> :

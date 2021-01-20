@@ -15,9 +15,11 @@ export default class SingleArticlePreview extends React.Component<SingleArticleP
       <Col lg="4" md="6" sm="6" xs="12">
         <Card className="mb-3">
           <Card.Header>
-            <img alt={ this.props.article.name }
+            <div className="article-picture">
+              <img alt={ this.props.article.name }
                  src={ this.props.article.imageUrl }
                  className="w-100" />
+            </div>
           </Card.Header>
           <Card.Body>
             <Card.Title as="p">

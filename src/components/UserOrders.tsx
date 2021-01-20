@@ -15,21 +15,16 @@ export default function UserOrders() {
 
   useEffect(() => {
     if (currentUser) {
-      const unsubscribe = getOrders();
-      return unsubscribe
+      projectFirestore.collection("orders").where("userId", "==", currentUser?.uid).get().then((querySnapshot) => {
+        let documents: any[] = [];
+        querySnapshot.forEach(doc => {
+          documents.push({...doc.data(), orderId: doc.id});
+        });
+        
+        setOrders(documents);
+      })
     }
   }, [currentUser])
-
-  function getOrders() {
-    projectFirestore.collection("orders").where("userId", "==", currentUser?.uid).get().then((querySnapshot) => {
-      let documents: any[] = [];
-      querySnapshot.forEach(doc => {
-        documents.push({...doc.data(), orderId: doc.id});
-      });
-      
-      setOrders(documents);
-    })
-  }
 
   function getCart(cartId: string) {
     projectFirestore.collection("carts").doc(cartId).get().then((doc) => {

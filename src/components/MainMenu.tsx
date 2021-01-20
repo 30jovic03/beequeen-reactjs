@@ -132,8 +132,8 @@ const MainMenu: React.FC<MainMenuProperties> = ({role}) => {
           Pčelinji proizvodi
           </Dropdown.Toggle>
           <Dropdown.Menu className="ml-5 bg-secondary">
-            <Link to='/login' className="nav-link secondary text-warning mb-1">Med</Link>
-            <Link to='/login' className="nav-link secondary text-warning mb-1">Ostali proizvodi</Link>
+            <Link to='/category/hBGLbzdbh3oVSsN3q1go' className="nav-link secondary text-warning mb-1">Med</Link>
+            <Link to='/category/pz7tteV5jHxI0J7nS57D' className="nav-link secondary text-warning mb-1">Ostali proizvodi</Link>
           </Dropdown.Menu>
         </Dropdown>
         <Link to='/category/1Q7Td0Fn6WquVDHWLc6F' className="nav-link secondary text-warning mb-1">Košnice</Link>
@@ -142,11 +142,11 @@ const MainMenu: React.FC<MainMenuProperties> = ({role}) => {
           Oprema za košnice
           </Dropdown.Toggle>
           <Dropdown.Menu className="ml-5 bg-secondary">
-            <Link to='/' className="nav-link secondary text-warning mb-1">Razmaci i nosači ramova</Link>
-            <Link to='/' className="nav-link secondary text-warning mb-1">Češljevi i regulatori leta</Link>
-            <Link to='/' className="nav-link secondary text-warning mb-1">Hranilice i pojila</Link>
-            <Link to='/' className="nav-link secondary text-warning mb-1">Matične rešetke</Link>
-            <Link to='/' className="nav-link secondary text-warning mb-1">Sakupljači polena, propolisa i perge</Link>
+            <Link to='/category/XnTdxGY32ZDJkxs6uHLi' className="nav-link secondary text-warning mb-1">Razmaci i nosači ramova</Link>
+            <Link to='/category/43WxcudjuTTCThY95e61' className="nav-link secondary text-warning mb-1">Češljevi i regulatori leta</Link>
+            <Link to='/category/w5vWTgmpMnO3gfxXAtS7' className="nav-link secondary text-warning mb-1">Hranilice i pojila</Link>
+            <Link to='/category/paywYLn8UaU7NXCy2WCi' className="nav-link secondary text-warning mb-1">Matične rešetke</Link>
+            <Link to='/category/vyYC2XZ063eOtSRW7BUn' className="nav-link secondary text-warning mb-1">Sakupljači polena, propolisa i perge</Link>
           </Dropdown.Menu>
         </Dropdown>
         <Dropdown>
@@ -154,18 +154,18 @@ const MainMenu: React.FC<MainMenuProperties> = ({role}) => {
           Pčelarski alat
           </Dropdown.Toggle>
           <Dropdown.Menu className="ml-5 bg-secondary">
-            <Link to='/' className="nav-link secondary text-warning mb-1">Pčelarski noževi i klešta</Link>
-            <Link to='/' className="nav-link secondary text-warning mb-1">Dimilice</Link>
-            <Link to='/' className="nav-link secondary text-warning mb-1">Četke za pčele</Link>
-            <Link to='/' className="nav-link secondary text-warning mb-1">Bežalice</Link>
-            <Link to='/' className="nav-link secondary text-warning mb-1">Pribor za ožičavanje ramova</Link>
+            <Link to='/category/N3Qe4OHWMlMFJQhMo8fc' className="nav-link secondary text-warning mb-1">Pčelarski noževi i klešta</Link>
+            <Link to='/category/7gmOqDLKHPlMrFRAEQBD' className="nav-link secondary text-warning mb-1">Dimilice</Link>
+            <Link to='/category/LKwiqPmoYdr3iXTNOW8F' className="nav-link secondary text-warning mb-1">Četke za pčele</Link>
+            <Link to='/category/edgsdRDZY8eJntNxwMZT' className="nav-link secondary text-warning mb-1">Bežalice</Link>
+            <Link to='/category/Y4f9qlzZyU5RNPUiYV5o' className="nav-link secondary text-warning mb-1">Pribor za ožičavanje ramova</Link>
           </Dropdown.Menu>
         </Dropdown>
-        <Link to='/' className="nav-link secondary text-warning mb-1">Zaštitna oprema</Link>
-        <Link to='/' className="nav-link secondary text-warning mb-1">Oprema za vrcanje</Link>
-        <Link to='/' className="nav-link secondary text-warning mb-1">Matice i rojevi</Link>
-        <Link to='/' className="nav-link secondary text-warning mb-1">Satne osnove</Link>
-        <Link to='/' className="nav-link secondary text-warning mb-1">Ostalo</Link>
+        <Link to='/category/1QCp6oZVgMrYsGSLzHTU' className="nav-link secondary text-warning mb-1">Zaštitna oprema</Link>
+        <Link to='/category/NzDaMpwwwG4SOOzWfuv6' className="nav-link secondary text-warning mb-1">Oprema za vrcanje</Link>
+        <Link to='/category/mbRr0QW9yBL09HBIYLOB' className="nav-link secondary text-warning mb-1">Matice i rojevi</Link>
+        <Link to='/category/mkPUzZX5zDepd9FrGYrA' className="nav-link secondary text-warning mb-1">Satne osnove</Link>
+        <Link to='/category/zoFBKKauLLY2wKd6C0RG' className="nav-link secondary text-warning mb-1">Ostalo</Link>
       </>
     )
   }
