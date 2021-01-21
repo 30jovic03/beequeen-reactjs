@@ -23,6 +23,8 @@ import AdministratorLogin from './components/AdministratorLogin';
 import About from './components/About';
 import Contact from './components/Contact';
 import AdministratorDashboardOrder from './components/AdministratorDashboardOrder';
+import UpdateProfile from './components/UpdateProfile';
+import ForgotPassword from './components/ForgotPassword';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -50,6 +52,8 @@ ReactDOM.render(
             <Route path="/signup" component={UserSignup} />
             <Route path="/login" component={UserLogin} />
             <Route path="/my-page" component={MyPage} />
+            <Route path="/update-profile" component={UpdateProfile} />
+            <Route path="/forgot-password" component={ForgotPassword} />
             <Route path="/category/:cId" component={ CategoryPage } />
             <Route path="/article/:aId" component={ ArticlePage } />
             <Route path="/admin-login" component={ AdministratorLogin } />

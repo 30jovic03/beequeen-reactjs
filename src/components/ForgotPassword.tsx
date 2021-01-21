@@ -1,38 +1,28 @@
 import React, { useRef, useState } from "react"
 import { Form, Button, Card, Alert, Container } from "react-bootstrap"
 import { useAuth } from "../firebase/AuthContext"
-import { Link, useHistory } from "react-router-dom"
+import { Link } from "react-router-dom"
 import MainMenu from "./MainMenu"
 
-export default function UserSignup() {
+export default function ForgotPassword() {
   const emailRef = useRef<HTMLInputElement>(null)
-  const passwordRef = useRef<HTMLInputElement>(null)
-  const passwordConfirmRef = useRef<HTMLInputElement>(null)
-  const { signup } = useAuth() as any
+  const { resetPassword } = useAuth()
   const [error, setError] = useState("")
+  const [message, setMessage] = useState("")
   const [loading, setLoading] = useState(false)
-  const history = useHistory()
 
   async function handleSubmit(e: { preventDefault: () => void }) {
     e.preventDefault()
 
-    if (emailRef.current && passwordRef.current && passwordConfirmRef.current) {
-
-      if (passwordRef.current.value.length < 6) {
-        return setError("Password should be at least 6 characters")
-      }
-
-      if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-        return setError("Passwords do not match")
-      }
-      
+    if (emailRef.current) {
       try {
+        setMessage("")
         setError("")
         setLoading(true)
-        await signup(emailRef.current.value, passwordRef.current.value)
-        history.push("/")
+        await resetPassword(emailRef.current.value)
+        setMessage("Mejl je poslat. Proverite vašu poštu za dalja uputstva.")
       } catch {
-        setError("Failed to create an account")
+        setError("Failed to reset password")
       }
   
       setLoading(false)
@@ -50,31 +40,25 @@ export default function UserSignup() {
         <div className="w-100" style={{ maxWidth: "400px" }}>
           <Card>
             <Card.Header style={{ border: "3px solid #6c757d"}} className="bg-warning">
-              <Card.Title className="text-center">Registracija</Card.Title>
+              <Card.Title className="text-center">Reset lozinke</Card.Title>
             </Card.Header>
             <Card.Body className="bg-secondary text-light">
+              {error && <Alert variant="danger">{error}</Alert>}
+              {message && <Alert variant="success">{message}</Alert>}
               <Form onSubmit={handleSubmit}>
                 <Form.Group id="email">
                   <Form.Label>Email</Form.Label>
                   <Form.Control type="email" ref={emailRef} required />
                 </Form.Group>
-                <Form.Group id="password">
-                  <Form.Label>Lozinka</Form.Label>
-                  <Form.Control type="password" ref={passwordRef} required />
-                </Form.Group>
-                <Form.Group id="password-confirm">
-                  <Form.Label>Potvrda lozinke</Form.Label>
-                  <Form.Control type="password" ref={passwordConfirmRef} required />
-                </Form.Group>
-                {error && <Alert variant="danger">{error}</Alert>}
-                <Button variant="warning" disabled={loading} className="w-100" type="submit">
-                  Registruj nalog
+                <Button disabled={loading} className="w-100" type="submit" variant="warning">
+                  Resetuj lozinku
                 </Button>
               </Form>
             </Card.Body>
           </Card>
           <div className="w-100 text-center mt-2">
-            Već imate nalog? <Link to="/login">Prijavi se</Link>
+          <Link to="/login">Prijavi se</Link><br/>
+            Nemate nalog? <Link to="/signup">Registruj se</Link>
           </div>
         </div>
       </Container>
